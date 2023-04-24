@@ -1,2 +1,3 @@
-. "$PSScriptRoot\modules\functions.ps1"
-. "$PSScriptRoot\modules\marks.ps1"
+. "$PSScriptRoot\custom_scripts\functions.ps1"
+. "$PSScriptRoot\custom_scripts\marks.ps1"
+. "$PSScriptRoot\custom_scripts\tc.ps1"
