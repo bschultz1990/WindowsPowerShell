@@ -1,6 +1,6 @@
 #Only display the last two directories in the prompt
-function prompt {
-	Write-Host (Split-Path -Path (Get-Location) -Leaf)">"
+function Prompt {
+	"$(Split-Path -Path (Get-Location) -Leaf)`r`n> "
 }
 
 function rename($file) {
@@ -8,6 +8,24 @@ function rename($file) {
 	Rename-Item -Path $file -NewName $newname
 	Write-Host "Renamed to $newname"
 }	
+function findme {
+	param (
+		[string]$file,
+		[string]$directory
+	)
+	if (-not (Test-Path "$directory") -or -not ("$file")) {
+		return "Please provide a valid file and directory to search for."
+	}
+	$filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Recurse -File
+	if ($filematches.Count -gt 0) {
+		Write-Host "Partial matches found:"
+		foreach ($match in $filematches) {
+			Write-Host $match.FullName
+		}
+		return 1
+	}
+	return 0
+}
 
 function getpath($file) {
 	if (!$file) {
@@ -22,10 +40,10 @@ function getpath($file) {
 }
 
 function man($cmd) {
-    Get-Help $cmd -full
+	Get-Help $cmd -full
 }
 
-function open ($file){
+function open ($file) {
 	Invoke-Item $file
 }
 
@@ -34,7 +52,7 @@ function mv($file, $destination) {
 }
 
 function touch($file) {
-    "" | Out-File $file -Encoding ASCII
+	"" | Out-File $file -Encoding ASCII
 }
 
 function mkdir ($dir) {
@@ -45,12 +63,12 @@ function trash ($file) {
 	Move-Item -Path $file -Destination $trash_folder -Force
 }
 
-function trash-empty {
-    Remove-Item -Path $trash_folder\*
+function trashempty {
+	Remove-Item -Path $trash_folder\*
 	Write-Host "Trash emptied."
 }
 
-function trash-view {
+function trashview {
 	$back = $PWD
 	cd $trash_folder
 	ls
