@@ -27,6 +27,13 @@ function findme {
 	return 0
 }
 
+function getdir {
+	Set-Clipboard $pwd
+	$full_path = Get-Clipboard
+	$prefix = "Microsoft.PowerShell.Core\FileSystem::"
+	return $full_path.Replace($prefix, "")
+}
+
 function getpath($file) {
 	if (!$file) {
 		Write-Host "Error: No source file provided."
