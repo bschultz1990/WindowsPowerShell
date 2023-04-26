@@ -1,17 +1,24 @@
 #Only display the last two directories in the prompt
 function Prompt {
-  "$(Split-Path -Path (Get-Location) -Leaf)`r`n> "
+  "$(getdir)`r`n> "
+  # "$(Split-Path -Path (Get-Location) -Leaf)`r`n> "
 }
 
 function findme2 {
   param (
     [string]$file,
-    [string]$directory
+    [string]$directory,
+    [string]$folder
   )
   if (-not (Test-Path "$directory") -or -not ("$file")) {
     return "Please provide a valid file and directory to search for."
   }
-  $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File
+  if ($folder = 1) {
+    $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Directory
+  }
+  else {
+    $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File
+  }
   if ($filematches.Count -gt 0) {
     $results = @()
     Write-Host "Partial matches found:"
