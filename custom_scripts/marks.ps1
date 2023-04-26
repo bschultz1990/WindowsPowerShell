@@ -19,7 +19,7 @@ function marks {
     Write-Host "$i  $($global:mark_array[$i])"
   }
   if (!$silent) {
-    goto
+    goto $global:mark_array
   }
 }
 
@@ -36,8 +36,12 @@ function unmark_all {
   Write-Host "Marks cleared."
 }
 
+# goto is an internal function never meant to be called by the user directly.
 function goto {
-   [int]$index = Read-Host "goto"
-   cd $global:mark_array[$index]
+  param (
+    [string[]]$array
+  )
+  [int]$index = Read-Host "goto"
+  cd $array[$index]
 
 }
