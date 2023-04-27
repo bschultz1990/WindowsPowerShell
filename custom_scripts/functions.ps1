@@ -1,7 +1,8 @@
 #Only display the last two directories in the prompt
 function Prompt {
-  "$(getdir)`r`n> "
+  # "$(getdir)`r`n> "
   # "$(Split-Path -Path (Get-Location) -Leaf)`r`n> "
+  return "$pwd`r`n> "
 }
 
 function findme2 {
