@@ -1,3 +1,6 @@
+$npp = "C:\Users\319427\Apps\npp.8.5.portable.x64\notepad++.exe"
+$trash_folder = "C:\Users\319427\OneDrive - Amcor\Desktop\Trash"
+
 #Only display the last two directories in the prompt
 function Prompt {
   # "$(getdir)`r`n> "
