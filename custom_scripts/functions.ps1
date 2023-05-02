@@ -1,11 +1,27 @@
-$npp = "C:\Users\319427\Apps\npp.8.5.portable.x64\notepad++.exe"
 $trash_folder = "C:\Users\319427\OneDrive - Amcor\Desktop\Trash"
+
+function c ($dir) {
+	cd $dir 
+	ls
+	}
+
+function reload {
+	. "$PROFILE"
+	}
+
+function npp {
+	start "C:\Users\319427\Apps\npp.8.5.portable.x64\notepad++.exe"
+	}
 
 #Only display the last two directories in the prompt
 function Prompt {
   # "$(getdir)`r`n> "
   # "$(Split-Path -Path (Get-Location) -Leaf)`r`n> "
   return "$pwd`r`n> "
+}
+
+function f {
+  Set-Location "$(find . -type d | fzf)"
 }
 
 function findme2 {
