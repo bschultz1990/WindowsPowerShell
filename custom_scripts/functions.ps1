@@ -1,5 +1,23 @@
 $trash_folder = "C:\Users\319427\OneDrive - Amcor\Desktop\Trash"
 
+function rename ($file) {
+	$destination = Read-Host "Enter a new name:"
+	Rename-Item -Path "$file" -NewName "$destination"
+	}
+
+function cwd {
+	Set-Clipboard (getdir)
+	}
+
+function unzip ($file, $folder) {
+	if (!$file){ $file = Read-Host "Enter zip file name" }
+	if (!$folder){ $folder = Read-Host "Enter folder name" }
+
+	Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
+	trash $file
+	c $folder
+	}
+
 function c ($dir) {
 	cd $dir 
 	ls
