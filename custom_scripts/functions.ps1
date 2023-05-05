@@ -51,12 +51,14 @@ function findme2 {
   if (-not (Test-Path "$directory") -or -not ("$file")) {
     return "Please provide a valid file and directory to search for."
   }
-  if ($folder = 1) {
-    $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Directory
-  }
-  else {
+  # Assume we're finding folder names
+  $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Directory
+
+  # ..unless the user omits the folder flag ;)
+  if (! $folder) {
     $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File
   }
+
   if ($filematches.Count -gt 0) {
     $results = @()
     Write-Host "Partial matches found:"
@@ -108,7 +110,6 @@ function getpath($file) {
   $file = (Get-Item $file).Name
   $path = Join-Path $dir $file
   Set-Clipboard $path
-  Write-Host "Copied $path to clipboard"
 }
 
 function man($cmd) {
