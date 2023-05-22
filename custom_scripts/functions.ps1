@@ -1,5 +1,9 @@
 $trash_folder = "C:\Users\319427\OneDrive - Amcor\Desktop\Trash"
 
+function sap {
+	start "C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe"
+	}
+
 function rename ($file) {
 	$destination = Read-Host "Enter a new name:"
 	Rename-Item -Path "$file" -NewName "$destination"

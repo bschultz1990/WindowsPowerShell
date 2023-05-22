@@ -2,3 +2,4 @@ Modules/
 Scripts/
 *_profile.ps1
 tc.ps1
+tc_paths.ps1
