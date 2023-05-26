@@ -1,3 +1,5 @@
+. "$PSScriptRoot\tc_paths.ps1"
+
 function classify ($file) {
   # Exit if the path is not accessible:
   if (-not (Test-Path $classification_folder) -or -not ($file)) {
