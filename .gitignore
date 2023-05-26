@@ -1,5 +1,4 @@
 Modules/
 Scripts/
-*_profile.ps1
-tc.ps1
+Microsoft.PowerShell_profile.ps1
 tc_paths.ps1
