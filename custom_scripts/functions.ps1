@@ -1,8 +1,7 @@
-$trash_folder = "C:\Users\319427\OneDrive - Amcor\Desktop\Trash"
-
-function sap {
-	start "C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe"
-	}
+$trash_folder = "~/Desktop/trash"
+if (-not(Test-Path "$trash_folder")) {
+	mkdir "$trash_folder"
+}
 
 function rename ($file) {
 	$destination = Read-Host "Enter a new name:"
