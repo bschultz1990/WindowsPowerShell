@@ -1,12 +1,62 @@
+$locTable = @{
+    "arezzo" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\AREZZO"
+    "forus" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Forus - Chile 10780157\Invoices\2023"
+    "grimoldi" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI-JUST US"
+    "grimuru" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMURU"
+    "lotus" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1034 Altra\Lotus Corp - Japan 10743817\Invoices\2023"
+}
+
+function ic {
+    # Get all items
+    # Filter by folder
+    # For each dir in directories,
+    # start $appletonINLurl($dir)
+    }
+
+function pdfme {
+param (
+    [Parameter(Mandatory=$true,
+    position=0)]
+    [String]$path
+)
+
+$xlFixedFormat = "Microsoft.Office.Interop.Excel.xlFixedFormatType" -as [type]
+$excelFiles = Get-ChildItem -Path $path -include *.xls, *.xlsx -recurse
+$objExcel = New-Object -ComObject excel.application
+$objExcel.visible = $false
+foreach($wb in $excelFiles)
+{
+#  $filepath = Join-Path -Path $path -ChildPath ($wb.BaseName+“.pdf”)
+ $filepath = $path, ($wb.BaseName), ".pdf" -join ""
+
+ $workbook = $objExcel.workbooks.open($wb.fullname, 3)
+ $workbook.Saved = $true
+Write-Host "saving $filepath"
+ $workbook.ExportAsFixedFormat($xlFixedFormat::xlTypePDF, $filepath)
+ $objExcel.Workbooks.close()
+}
+$objExcel.Quit()
+}
+
+
+function fileme {
+    $ext = Read-Host "Enter file extension to filter by"
+
+    foreach ($item in $locTable.Keys) {
+        Write-Host "Moving the following files to $($locTable[$item])"
+        ls *$item*.$ext
+        mv *$item* $locTable[$item]
+    }
+}
+
 function mm {
     param (
         [Parameter(Mandatory=$true,
         position=0)]
         [String]$new_folder
     )
-    mkdir $new_folder
+    New-Item -ItemType Directory -Path $new_folder
     mv *$new_folder*.pdf .\$new_folder\
-    clear
     ls
 }
 
