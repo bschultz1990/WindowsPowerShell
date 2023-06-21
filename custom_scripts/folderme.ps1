@@ -1,41 +1,65 @@
-$locTable = @{
-    "arezzo" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\AREZZO"
-    "forus" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Forus - Chile 10780157\Invoices\2023"
-    "grimoldi" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI-JUST US"
-    "grimuru" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMURU"
-    "lotus" = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1034 Altra\Lotus Corp - Japan 10743817\Invoices\2023"
+function find {
+    param (
+        [Parameter(Mandatory=$true, position=0)]
+        [String]$file
+    )
+    # Get-ChildItem -Path . -Filter $file -Recurse
+    Get-ChildItem -Path . -Include $file -Recurse
 }
 
-function ic {
-    # Get all items
-    # Filter by folder
-    # For each dir in directories,
-    # start $appletonINLurl($dir)
-    }
+function finddocs {
+    param (
+        [Parameter(Mandatory=$true, position=0)]
+        [String]$docnum
+    )
+    $appletonDocs = "https://vfc.sharepoint.com/sites/AppletonINLDocuments/_layouts/15/search.aspx/siteall?q="
+    cd $international
+    $docstring = $appletonDocs, $docnum -join ""
+    start $docstring
+    fd $docnum
+}
+
+function dl {
+    param (
+        [Parameter(Mandatory=$true, position=0)]
+        [String]$file
+    )
+    cp $file "~/Downloads"
+    ls "~/Downloads"
+}
 
 function pdfme {
-param (
-    [Parameter(Mandatory=$true,
-    position=0)]
-    [String]$path
-)
+    param (
+        
+        [Parameter(Mandatory=$true, position=0)]
+        [String]$path
+    )
 
-$xlFixedFormat = "Microsoft.Office.Interop.Excel.xlFixedFormatType" -as [type]
-$excelFiles = Get-ChildItem -Path $path -include *.xls, *.xlsx -recurse
-$objExcel = New-Object -ComObject excel.application
-$objExcel.visible = $false
-foreach($wb in $excelFiles)
-{
-#  $filepath = Join-Path -Path $path -ChildPath ($wb.BaseName+“.pdf”)
- $filepath = $path, ($wb.BaseName), ".pdf" -join ""
+    $xlFixedFormat = "Microsoft.Office.Interop.Excel.xlFixedFormatType" -as [type]
+    $excelFiles = Get-ChildItem -Path $path -include *.xls, *.xlsx -recurse
+    $objExcel = New-Object -ComObject excel.application
+    $objExcel.visible = $false
+    foreach($wb in $excelFiles)
+    {
+        $fileName = $wb.BaseName -replace '\s','_' # Replace spaces with underscores
+        $filepath = Join-Path -Path $path -ChildPath "$fileName.pdf"
 
- $workbook = $objExcel.workbooks.open($wb.fullname, 3)
- $workbook.Saved = $true
-Write-Host "saving $filepath"
- $workbook.ExportAsFixedFormat($xlFixedFormat::xlTypePDF, $filepath)
- $objExcel.Workbooks.close()
-}
-$objExcel.Quit()
+        $workbook = $objExcel.workbooks.open($wb.fullname, 3)
+        $workbook.Saved = $true
+        Write-Host "Saving $filepath"
+        try {
+            $workbook.ExportAsFixedFormat($xlFixedFormat::xlTypePDF, $filepath)
+            if (-not (Test-Path -Path $filepath)) {
+                Write-Warning "PDF file was not created: $filepath"
+            }
+        } catch {
+            Write-Warning "Error exporting PDF file: $_"
+        }
+        $workbook.Close()
+    }
+    $objExcel.Quit()
+    [System.Runtime.InteropServices.Marshal]::ReleaseComObject($workbook) | Out-Null
+    [System.Runtime.InteropServices.Marshal]::ReleaseComObject($objExcel) | Out-Null
 }
 
 
