@@ -19,15 +19,6 @@ function finddocs {
     fd $docnum
 }
 
-function dl {
-    param (
-        [Parameter(Mandatory=$true, position=0)]
-        [String]$file
-    )
-    cp $file "~/Downloads"
-    ls "~/Downloads"
-}
-
 function pdfme {
     param (
         
@@ -73,6 +64,7 @@ function fileme {
     }
 }
 
+#moveme
 function mm {
     param (
         [Parameter(Mandatory=$true,
