@@ -25,11 +25,11 @@ function fzo {
         start $(fzf)
 }
 
-function fzd {
-        $regex = ".*(?=\\)"
-        $dir = findstr $regex $(fzf)
-        cd $dir
-        }
+# function fzd {
+#         $regex = ".*(?=\\)"
+#         $dir = $regex $(fzf)
+#         cd $dir
+#         }
 
 function rename ($file) {
 	$destination = Read-Host "Enter a new name:"
@@ -55,17 +55,11 @@ function c ($dir) {
 	}
 
 function reload {
-	. "$PROFILE"
-	}
-
-function npp {
-	start "C:\Users\319427\Apps\npp.8.5.portable.x64\notepad++.exe"
+	. "$profile"
 	}
 
 #Only display the last two directories in the prompt
 function Prompt {
-  # "$(getdir)`r`n> "
-  # "$(Split-Path -Path (Get-Location) -Leaf)`r`n> "
   return "$pwd`r`n> "
 }
 
