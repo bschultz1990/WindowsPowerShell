@@ -1,13 +1,13 @@
 function fzo {
-  start $(fzf)
+  Invoke-Item $(fzf)
 }
 
-FIXME
- function fzd {
-         $regex = ".*(?=\\)"
-         $dir = ($regex fzf)
-           Write-Host $dir
-         }
+##FIXME
+# function fzd {
+#         $regex = ".*(?=\\)"
+#         $dir = $regex$(fzf)
+#           Write-Host $dir
+#         }
 
 function rename ($file) {
   $destination = Read-Host "Enter a new name:"

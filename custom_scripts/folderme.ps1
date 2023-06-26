@@ -78,19 +78,15 @@ function mm {
 
 
 function folderme {
-    param (
-        [Parameter(Mandatory=$true,
-        position=0)]
-        [String]$FolderPath
-    )
-    $ext_input = Read-Host "Enter file extension to look for:"
-    $ext = "*.", $ext_input -join ""
+    $FolderPath = "."
+    # $ext_input = Read-Host "Enter file extension to look for:"
+    $ext = "*.", "pdf" -join ""
     $files = Get-ChildItem -Path $FolderPath -Filter $ext -File
 
     $prefix = Read-Host "What is before your match?"
     $suffix = Read-Host "What is immediately after your match?"
     $regex = $prefix, "(.+?)", $suffix -join ""
-    Write-Host "regex is: $regex"
+    # Write-Host "regex is: $regex"
 
     $prename = Read-Host "What would you like before your new folder name? (leave blank to skip)"
     $postname = Read-Host "How about after? (leave blank to skip)"
@@ -111,6 +107,7 @@ foreach ($file in $files) {
             # create new folder and add to hashtable
             if (-not (Test-Path -Path $newFolderPath)) {
                 New-Item -ItemType Directory -Path $newFolderPath | Out-Null
+        Write-Host $newFolderPath
             }
             $uniqueMatches[$newFolderName] = $newFolderPath
         }
