@@ -1,62 +1,40 @@
-
-
-# $trash_folder = "~/Documents/trash"
-# if (-not(Test-Path "$trash_folder")) {
-# 	mkdir "$trash_folder"
-# 	Write-Host "Trash folder created at: $trash_folder"
-# }
-
-# function trash ($file) {
-#   Move-Item -Path $file -Destination $trash_folder -Force
-# }
-
-# function trashempty {
-#   Remove-Item -Path $trash_folder\*
-#   Write-Host "Trash emptied."
-# }
-
-# function trashview {
-#   $back = $PWD
-#   cd $trash_folder
-#   ls
-# }
-
 function fzo {
-        start $(fzf)
+  start $(fzf)
 }
 
-# function fzd {
-#         $regex = ".*(?=\\)"
-#         $dir = $regex $(fzf)
-#         cd $dir
-#         }
+FIXME
+ function fzd {
+         $regex = ".*(?=\\)"
+         $dir = ($regex fzf)
+           Write-Host $dir
+         }
 
 function rename ($file) {
-	$destination = Read-Host "Enter a new name:"
-	Rename-Item -Path "$file" -NewName "$destination"
-	}
+  $destination = Read-Host "Enter a new name:"
+    Rename-Item -Path "$file" -NewName "$destination"
+}
 
 function cwd {
-	Set-Clipboard (getdir)
-	}
+  Set-Clipboard (getdir)
+}
 
 function unzip ($file, $folder) {
-	if (!$file){ $file = Read-Host "Enter zip file name" }
-	if (!$folder){ $folder = Read-Host "Enter folder name" }
+  if (!$file){ $file = Read-Host "Enter zip file name" }
+  if (!$folder){ $folder = Read-Host "Enter folder name" }
 
-	Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
-	trash $file
-	c $folder
-	}
+  Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
+    trash $file
+    c $folder
+}
 
 function c ($dir) {
-	cd $dir 
-	ls
-	}
+  cd $dir 
+    ls
+}
 
 function reload {
-	. "$profile"
-	}
+  . "$profile"
+}
 
 #Only display the last two directories in the prompt
 function Prompt {
@@ -69,72 +47,73 @@ function f {
 
 function findme2 {
   param (
-    [string]$file,
-    [string]$directory,
-    [string]$folder
-  )
-  if (-not (Test-Path "$directory") -or -not ("$file")) {
-    return "Please provide a valid file and directory to search for."
-  }
+      [string]$file,
+      [string]$directory,
+      [string]$folderflag
+      )
+    if (-not (Test-Path "$directory") -or -not ("$file")) {
+      return "Please provide a valid file and directory to search for."
+    }
+
   # Assume we're finding folder names
   $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Directory
 
   # ..unless the user omits the folder flag ;)
-  if (! $folder) {
+  if (! $folderflag) {
     $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File
   }
 
   if ($filematches.Count -gt 0) {
     $results = @()
-    Write-Host "Partial matches found:"
-    foreach ($match in $filematches) {
-      $results += $match.FullName
-    }
+      Write-Host "Partial matches found:"
+      foreach ($match in $filematches) {
+        $results += $match.FullName
+      }
     for ($i = 0; $i -lt $results.Length; $i++) {
       Write-Host "$i $($results[$i])"
     }
     [int]$index = Read-Host "select"
-    $global:find_selection = $results[$index]
-    Set-Clipboard $results[$index]
-    return 1
+      $global:find_selection = $results[$index]
+        Set-Clipboard $results[$index]
+        return 1
   }
   return 0
 }
 function findme {
   param (
-    [string]$file,
-    [string]$directory
-  )
-  if (-not (Test-Path "$directory") -or -not ("$file")) {
-    return "Please provide a valid file and directory to search for."
-  }
-  $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File
-  if ($filematches.Count -gt 0) {
-    Write-Host "Partial matches found:"
-    foreach ($match in $filematches) {
-      Write-Host $match.FullName
+      [string]$file,
+      [string]$directory
+      )
+    if (-not (Test-Path "$directory") -or -not ("$file")) {
+      return "Please provide a valid file and directory to search for."
     }
-    return 1
-  }
+  $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File
+    if ($filematches.Count -gt 0) {
+      Write-Host "Partial matches found:"
+        foreach ($match in $filematches) {
+          Write-Host $match.FullName
+        }
+      return 1
+    }
   return 0
 }
 
 function getdir {
   Set-Clipboard $pwd
-  $full_path = Get-Clipboard
-  $prefix = "Microsoft.PowerShell.Core\FileSystem::"
-  return $full_path.Replace($prefix, "")
+    $full_path = Get-Clipboard
+    $prefix = "Microsoft.PowerShell.Core\FileSystem::"
+    return $full_path.Replace($prefix, "")
 }
 
 function getpath($file) {
   if (!$file) {
     Write-Host "Error: No source file provided."
-    return
+      return
   }
   $dir = (Get-Item $file).DirectoryName
-  $file = (Get-Item $file).Name
-  $path = Join-Path $dir $file
-  Set-Clipboard $path
+    $file = (Get-Item $file).Name
+    $path = Join-Path $dir $file
+    Set-Clipboard $path
 }
 
 function man($cmd) {
@@ -154,8 +133,6 @@ function touch($file) {
 }
 
 function mkdir ($dir) {
-if (-not (Test-Path -Path $PROFILE)) {
-	New-Item -Path $PROFILE -Type File -Force
-	}
+  New-Item -Path "." -Name "$dir" -ItemType "directory"
 }
 
