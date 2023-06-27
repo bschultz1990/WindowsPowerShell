@@ -10,6 +10,7 @@ function fzo {
 #         }
 
 function rename ($file) {
+  Set-Clipboard $file
   $destination = Read-Host "Enter a new name:"
     Rename-Item -Path "$file" -NewName "$destination"
 }
@@ -17,6 +18,25 @@ function rename ($file) {
 function cwd {
   Set-Clipboard (getdir)
 }
+
+function combine($file1, $file2) {
+  $out_dir = getdir
+  $name = Read-Host "Output file name?"
+  $file1, $file2 | Merge-PDF -OutputPath $out_dir\$name.pdf
+  open $out_dir\$name.pdf
+}
+#
+# function combine() {
+# [CmdletBinding()]
+#     param (
+#         [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true)]
+#         [String[]]$Files
+#     )
+#   $out_dir = getdir
+#   $name = Read-Host "Output file name?"
+#   $Files | Merge-PDF -OutputPath $out_dir\$name.pdf
+#   open $out_dir\$name.pdf
+# }
 
 function unzip ($file, $folder) {
   if (!$file){ $file = Read-Host "Enter zip file name" }
