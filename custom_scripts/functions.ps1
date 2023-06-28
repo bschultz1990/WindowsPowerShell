@@ -9,8 +9,19 @@ function fzo {
 #           Write-Host $dir
 #         }
 
+function reinvoice ($files) {
+        mv $files ~/Downloads
+        python $invscript_local
+        mv ~/Downloads/* .
+}
+
+function dc ($ngc) {
+        $url1 = "https://vfc.sharepoint.com/sites/AppletonINLDocuments/_layouts/15/search.aspx/siteall?q=","$ngc", -join ""
+        Write-Host $url
+}
+
 function rename ($file) {
-  Set-Clipboard $file
+  # Set-Clipboard $file
   $destination = Read-Host "Enter a new name:"
     Rename-Item -Path "$file" -NewName "$destination"
 }
@@ -22,8 +33,8 @@ function cwd {
 function combine($file1, $file2) {
   $out_dir = getdir
   $name = Read-Host "Output file name?"
-  $file1, $file2 | Merge-PDF -OutputPath $out_dir\$name.pdf
-  open $out_dir\$name.pdf
+  $file1, $file2 | Merge-PDF -OutputPath $out_dir\$name.pdf -Force
+  # open $out_dir\$name.pdf
 }
 #
 # function combine() {
