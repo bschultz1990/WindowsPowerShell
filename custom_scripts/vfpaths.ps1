@@ -1,0 +1,13 @@
+$international = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\"
+$attachments = "C:\Users\bschul3\OneDrive - VFC Corp\Attachments\"
+$documents = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\"
+$invoices = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\"
+$library = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\"
+$invscript = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\international_invoices.py"
+$invscript_local = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\international_invoices.py"
+
+$vans_grimoldi = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimoldi - Argentina 10757570\Invoices\2023 Invoices\"
+$vans_grimuru = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimuru - Uruguay 10761571\Invoices\2023\"
+$tnf_justus = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Just Us S.A\Invoices & Documents (PL CO BL)\2023 Invoices\"
+$tnf_grimoldi = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Grimoldi - Argentina 10757570\Invoices\2023 Invoices\"
+$vans_arezzo = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Arezzo - Brazil 10779997\Invoices\2023\"

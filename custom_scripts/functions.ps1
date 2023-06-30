@@ -1,3 +1,12 @@
+function trash {
+  [CmdletBinding()]
+  param (
+    [Parameter(Mandatory=$true, Position=0, ValueFromRemainingArguments=$true)]
+    [String[]]$files
+  )
+  Remove-ItemSafely $files
+}
+
 function fzo {
   Invoke-Item $(fzf)
 }
@@ -151,8 +160,13 @@ function man($cmd) {
   Get-Help $cmd -full
 }
 
-function open ($file) {
-  Invoke-Item $file
+function open {
+  param (
+    [CmdletBinding()]
+    [Parameter(Mandatory=$true, position=0, ValueFromRemainingArguments=$true)]
+    [String[]]$files
+  )
+  Invoke-Item $files
 }
 
 function mv($file, $destination) {
