@@ -5,6 +5,7 @@ $invoices = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices t
 $library = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\"
 $invscript = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\international_invoices.py"
 $invscript_local = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\international_invoices.py"
+$desktop = "C:\Users\bschul3\OneDrive - VFC Corp\Desktop"
 
 $vans_grimoldi = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimoldi - Argentina 10757570\Invoices\2023 Invoices\"
 $vans_grimuru = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimuru - Uruguay 10761571\Invoices\2023\"

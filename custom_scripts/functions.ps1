@@ -11,12 +11,32 @@ function fzo {
   Invoke-Item $(fzf)
 }
 
+function checklist {
+  clear
+  Write-Host "`n=== Invoice Checklist ===`n"
+  "[ ] Run Python`n"+
+  "[ ] NGC Numbers moved on all pages`n"+
+  "[ ] Delete footers from middle pages`n"+
+  "[ ] Page numbers correct`n"+
+  "[ ] Total value`n"+
+  "[ ] Total Qty/Pcs from official PL`n"+
+  "[ ] Total Cartons/Pkg from official PL`n"+
+  "[ ] Net Wt. from official PL`n"+
+  "[ ] Gross wt. from BL or AWB`n"+
+  "[ ] Add 'Confirmed BJS' to inovice file and send`n"
+}
+
 ##FIXME
 # function fzd {
 #         $regex = ".*(?=\\)"
 #         $dir = $regex$(fzf)
 #           Write-Host $dir
 #         }
+
+function brands {
+  Set-Clipboard "VANS; ALTRA; CORP_SERV; DICKIES; ICEBREAKER; JANSPORT; NORTHFACE; OA_CLEAR; OA_COAL; PANAMA; SMARTWOOL; SUPREME; TIMBERLAND; VANSCASA"
+  Write-Host "Brands copied!"
+}
 
 function reinvoice ($files) {
         mv $files ~/Downloads
