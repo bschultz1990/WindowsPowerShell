@@ -12,3 +12,4 @@ $vans_grimuru = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Van
 $tnf_justus = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Just Us S.A\Invoices & Documents (PL CO BL)\2023 Invoices\"
 $tnf_grimoldi = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Grimoldi - Argentina 10757570\Invoices\2023 Invoices\"
 $vans_arezzo = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Arezzo - Brazil 10779997\Invoices\2023\"
+$smartwool_oda = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Outdoor Agency - Australia 80070847\Invoices\2023"
