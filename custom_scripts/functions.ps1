@@ -13,7 +13,7 @@ function fzo {
 
 function checklist {
   clear
-  Write-Host "`n=== Invoice Checklist ===`n"
+  Write-Host "=== Invoice Checklist ===`n"
   "[ ] Run Python`n"+
   "[ ] NGC Numbers moved on all pages`n"+
   "[ ] Delete footers from middle pages`n"+
@@ -108,19 +108,20 @@ function f {
 function findme2 {
   param (
       [string]$file,
-      [string]$directory,
       [string]$folderflag
       )
-    if (-not (Test-Path "$directory") -or -not ("$file")) {
+    if (-not ("$file")) {
       return "Please provide a valid file and directory to search for."
     }
 
+    $directory = "."
+
   # Assume we're finding folder names
-  $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Directory
+  $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Directory -recurse
 
   # ..unless the user omits the folder flag ;)
-  if (! $folderflag) {
-    $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File
+  if ($folderflag -eq "") {
+    $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File -recurse
   }
 
   if ($filematches.Count -gt 0) {
