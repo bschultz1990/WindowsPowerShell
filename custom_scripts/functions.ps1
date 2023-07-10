@@ -1,3 +1,7 @@
+function test {
+	Write-Host "It worked!"
+}
+
 function trash {
   [CmdletBinding()]
   param (
@@ -92,10 +96,6 @@ function c ($dir) {
     ls
 }
 
-function reload {
-  . "$profile"
-}
-
 #Only display the last two directories in the prompt
 function Prompt {
   return "$pwd`r`n> "
@@ -108,7 +108,7 @@ function f {
 function findme2 {
   param (
       [string]$file,
-      [string]$folderflag
+      [switch]$folderflag
       )
     if (-not ("$file")) {
       return "Please provide a valid file and directory to search for."
