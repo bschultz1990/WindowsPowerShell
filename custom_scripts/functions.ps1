@@ -15,6 +15,17 @@ function fzo {
   Invoke-Item $(fzf)
 }
 
+
+function doctypes {
+  clear
+  Write-Host "=== Document Types ===`n"
+  Write-Host "4200 = Factory PO (not specific)`n"+
+  Write-Host "1001 = Sales Doc`n"+
+  Write-Host "501_ = External ID of Delivery Note`n"+
+  Write-Host "V000 = External ID of Delivery Note`n"+
+  Write-Host "352_ = Billing Document / Invoice (100% specific)`n"+
+}
+
 function checklist {
   clear
   Write-Host "=== Invoice Checklist ===`n"
