@@ -108,7 +108,7 @@ function f {
 function findme2 {
   param (
       [string]$file,
-      [switch]$folderflag
+      [string]$folderflag
       )
     if (-not ("$file")) {
       return "Please provide a valid file and directory to search for."
