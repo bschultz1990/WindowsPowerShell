@@ -19,11 +19,11 @@ function fzo {
 function doctypes {
   clear
   Write-Host "=== Document Types ===`n"
-  Write-Host "4200 = Factory PO (not specific)`n"+
-  Write-Host "1001 = Sales Doc`n"+
-  Write-Host "501_ = External ID of Delivery Note`n"+
-  Write-Host "V000 = External ID of Delivery Note`n"+
-  Write-Host "352_ = Billing Document / Invoice (100% specific)`n"+
+  "4200 = Factory PO (not specific)`n"+
+  "1001 = Sales Doc`n"+
+  "501_ = External ID of Delivery Note`n"+
+  "V000 = External ID of Delivery Note`n"+
+  "352_ = Billing Document / Invoice (100% specific)`n"
 }
 
 function checklist {
@@ -51,12 +51,6 @@ function checklist {
 function brands {
   Set-Clipboard "VANS; ALTRA; CORP_SERV; DICKIES; ICEBREAKER; JANSPORT; NORTHFACE; OA_CLEAR; OA_COAL; PANAMA; SMARTWOOL; SUPREME; TIMBERLAND; VANSCASA"
   Write-Host "Brands copied!"
-}
-
-function reinvoice ($files) {
-        mv $files ~/Downloads
-        python $invscript_local
-        mv ~/Downloads/* .
 }
 
 function dc ($ngc) {
@@ -213,3 +207,10 @@ function mkdir ($dir) {
   New-Item -Path "." -Name "$dir" -ItemType "directory"
 }
 
+function ga { git add . }
+function gs { git status }
+function gc {
+        param([Parameter(Mandatory=$true)] [string]$message)
+        git commit
+        }
+function gp { git push }
