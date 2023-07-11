@@ -10,3 +10,14 @@ $nvimconfig = "~\AppData\Local\nvim\"
 if (-not (Test-Path -Path $nvimconfig)) {
 	New-Item -Path ("$nvimconfig", "init.lua" -join "") -Type File -Force
 	}
+
+# $modules = @(
+# "Get-ChildItemColor",
+# ""
+# )
+# foreach ($module in $modules) {
+# if (-not(Test-Path -Path ("$PSScriptRoot\", $module))) {
+# Write-Host "Following packages are not found:`r" +
+# $module
+# # Install-Module $module -Scope CurrentUser
+# }
