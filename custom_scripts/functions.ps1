@@ -54,14 +54,16 @@ Write-Host "Brands copied!"
 }
 
 function dc ($ngc) {
-$url1 = "https://vfc.sharepoint.com/sites/AppletonINLDocuments/_layouts/15/search.aspx/siteall?q=","$ngc", -join ""
+$url = "https://vfc.sharepoint.com/sites/AppletonINLDocuments/_layouts/15/search.aspx/siteall?q="+"$ngc"
 Write-Host $url
 }
 
 function rename ($file) {
 # Set-Clipboard $file
-$destination = Read-Host "Enter a new name:"
+$destination = Read-Host "Enter a new name"
 Rename-Item -Path "$file" -NewName "$destination"
+Set-Clipboard $destination
+Write-Host "$destination copied!"
 }
 
 function cwd {
@@ -73,6 +75,16 @@ Set-Clipboard (getdir)
 # $name = Read-Host "Output file name?"
 # $file1, $file2 | Merge-PDF -OutputPath $out_dir\$name.pdf -Force
 # }
+
+function zip { 
+  param (
+    [CmdletBinding()]
+    [Parameter(Mandatory=$true, position=0, ValueFromRemainingArguments=$true)]
+    [String[]]$files
+  )
+  $folder = Read-Host "Enter folder name"
+  Compress-Archive -Path "$files" -DestinationPath ("$pwd" + "\" + "$folder" + ".zip")
+ }
 
 function unzip ($file, $folder) {
 if (!$file){ $file = Read-Host "Enter zip file name" }
@@ -154,6 +166,11 @@ foreach ($match in $filematches) {
 return 1
 }
 return 0
+}
+
+function getname {
+  Set-Clipboard (Get-Item -Path $pwd).Name
+  Write-Host "Name copied!"
 }
 
 function getdir {

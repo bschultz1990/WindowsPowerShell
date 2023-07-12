@@ -5,10 +5,11 @@ $invoices = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices t
 $library = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\"
 $invscript = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\international_invoices.py"
 $invscript_local = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\international_invoices.py"
+
 $dto = "C:\Users\bschul3\OneDrive - VFC Corp\Desktop"
 $dt = "C:\Users\bschul3\Desktop"
-$dl = "C:\Users\bschul3\Downloads"
 $dtl = "\\Client\C$\Users\bschul3\Desktop"
+$dl = "C:\Users\bschul3\Downloads"
 $dll = "\\Client\C$\Users\bschul3\Downloads"
 
 $jansport_forus = "\\jsap2nfiler1\jsap_data\sharedir\Credit\International\1001 JanSport\Forus - Chile 80008794\Invoices\2023"
