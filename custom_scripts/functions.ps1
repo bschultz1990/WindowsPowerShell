@@ -160,8 +160,8 @@ function findme {
   return 0
 }
     
-function getname {
-  Set-Clipboard ("'" + (Get-Item -Path $pwd).Name + "'")
+function gn {
+  Set-Clipboard ((Get-Item -Path $pwd).Name)
   Write-Host "Name copied!"
 }
     
@@ -186,8 +186,8 @@ function getpath($file) {
 function man($cmd) {
   Get-Help $cmd -full
 }
-    
-function open {
+#  Open command 
+function o {
   param (
     [CmdletBinding()]
     [Parameter(Mandatory = $true, position = 0, ValueFromRemainingArguments = $true)]
