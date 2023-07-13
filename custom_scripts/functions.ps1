@@ -230,6 +230,7 @@ function strip ($file) {
   Rename-Item -Path out.pdf -NewName $file
 }
 
-function note ($file) {
-  if (-not $file) { return "Please provide a file name." }
+function note ($note) {
+  while (-not $note) { $note = Read-Host "Provide a note surrounded in quotes" }
+  Write-Output (Get-Date -Format MM/yy:) $note`n >> notes.txt
 }
