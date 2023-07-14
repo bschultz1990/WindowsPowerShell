@@ -68,14 +68,20 @@ function rename ($file) {
 function cwd {
   Set-Clipboard (getdir)
 }
+# FIXME:
 function zip { 
   param (
     [CmdletBinding()]
     [Parameter(Mandatory = $true, position = 0, ValueFromRemainingArguments = $true)]
     [String[]]$files
   )
-  $folder = Read-Host "Enter folder name"
-  Compress-Archive -Path "$files" -DestinationPath ("$pwd" + "\" + "$folder" + ".zip")
+  while (! $zipfile) {
+    $zipfile = Read-Host "Enter folder name."
+  }
+  $files2 = $files.replace(" ", ",")
+  Write-Host $files
+  Write-Host $files2
+  # Compress-Archive -Path "$files2" -DestinationPath ("$pwd" + "\" + "$zipfile" + ".zip")
 }
     
 function unzip ($file, $folder) {
@@ -232,5 +238,6 @@ function strip ($file) {
 
 function note ($note) {
   while (-not $note) { $note = Read-Host "Provide a note surrounded in quotes" }
-  Write-Output (Get-Date -Format MM/dd:) $note`n >> notes.txt
+  # Write-Output (Get-Date -Format MM/dd:) $note`n >> notes.txt
+  Add-Content -Path notes.txt -Value (Get-Date -Format MM/dd:), $note`n
 }
