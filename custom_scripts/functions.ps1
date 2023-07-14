@@ -232,5 +232,5 @@ function strip ($file) {
 
 function note ($note) {
   while (-not $note) { $note = Read-Host "Provide a note surrounded in quotes" }
-  Write-Output (Get-Date -Format MM/yy:) $note`n >> notes.txt
+  Write-Output (Get-Date -Format MM/dd:) $note`n >> notes.txt
 }
