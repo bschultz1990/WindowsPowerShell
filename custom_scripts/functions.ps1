@@ -187,7 +187,7 @@ function man($cmd) {
   Get-Help $cmd -full
 }
 #  Open command 
-function o {
+function open {
   param (
     [CmdletBinding()]
     [Parameter(Mandatory = $true, position = 0, ValueFromRemainingArguments = $true)]
