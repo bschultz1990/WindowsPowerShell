@@ -83,35 +83,35 @@ function zip {
   Write-Host $files2
   # Compress-Archive -Path "$files2" -DestinationPath ("$pwd" + "\" + "$zipfile" + ".zip")
 }
-    
+  
 function unzip ($file, $folder) {
   if (!$file) { $file = Read-Host "Enter zip file name" }
   if (!$folder) { $folder = Read-Host "Enter folder name" }
-      
+    
   Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
   trash $file
   c $folder
 }
-    
+  
 function c ($dir) {
   cd $dir 
   ls
 }
-    
+  
 #Only display the last two directories in the prompt
 function prompthelper {
   $short_dir = $pwd.Replace('Microsoft.PowerShell.Core\FileSystem::', '')
   return $short_dir
 }
-    
+  
 function Prompt {
   return "$pwd`r`n> "
 }
-    
+  
 function f {
   Set-Location "$(find . -type d | fzf)"
 }
-    
+  
 function findme2 {
   param (
     [string]$file,
@@ -120,17 +120,17 @@ function findme2 {
   if (-not ("$file")) {
     return "Please provide a valid file and directory to search for."
   }
-      
+    
   $directory = "."
-      
+    
   # Assume we're finding folder names
   $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -Directory -recurse
-      
+    
   # ..unless the user omits the folder flag ;)
   if ($folderflag -eq "") {
     $filematches = Get-ChildItem -Path "$directory" -Filter "*$file*" -File -recurse
   }
-      
+    
   if ($filematches.Count -gt 0) {
     $results = @()
     Write-Host "Partial matches found:"
@@ -165,19 +165,19 @@ function findme {
   }
   return 0
 }
-    
+  
 function gn {
   Set-Clipboard ((Get-Item -Path $pwd).Name)
   Write-Host "Name copied!"
 }
-    
+  
 function getdir {
   Set-Clipboard $pwd
   $full_path = Get-Clipboard
   $prefix = "Microsoft.PowerShell.Core\FileSystem::"
   return $full_path.Replace($prefix, "")
 }
-    
+  
 function getpath($file) {
   if (!$file) {
     Write-Host "Error: No source file provided."
@@ -188,7 +188,7 @@ function getpath($file) {
   $path = Join-Path $dir $file
   Set-Clipboard $path
 }
-    
+  
 function man($cmd) {
   Get-Help $cmd -full
 }
@@ -201,43 +201,34 @@ function open {
   )
   Invoke-Item $files
 }
-    
+  
 function mv($file, $destination) {
   Move-Item -Path $file -Destination $destination
 }
-    
+  
 function touch($file) {
-  "" | Out-File $file -Encoding ASCII
+  "" | Out-File $file -Encoding UTF8
 }
-    
+  
 function mkdir ($dir) {
   New-Item -Path "." -Name "$dir" -ItemType "directory"
 }
-    
+  
 function ga { git add . }
 function gs { git status }
-function gc {
-  param([Parameter(Mandatory = $true)] [string]$message)
-  git commit
-}
 function gp { git push }
-    
-function right ($file) {
-  if (-not $file) { return "Please provide a file name." }
-  pdftk $file cat 1-endeast output out.pdf
-  rm $file
-  Rename-Item -Path out.pdf -NewName $file
-}
-    
 function strip ($file) {
   if (-not $file) { return "Please provide a file name." }
   pdftk $file cat output out.pdf
   rm $file
   Rename-Item -Path out.pdf -NewName $file
 }
-
 function note ($note) {
-  while (-not $note) { $note = Read-Host "Provide a note surrounded in quotes" }
-  # Write-Output (Get-Date -Format MM/dd:) $note`n >> notes.txt
-  Add-Content -Path notes.txt -Value (Get-Date -Format MM/dd:), $note`n
+  while (-not $note) { $note = Read-Host "Note content" }
+  if (-not (Test-Path notes.txt)) { 
+    Add-Content -Path notes.txt -Value (Get-Date -Format MM/dd:), $note
+    return
+  }
+    (Get-Content -Path "notes.txt" -Raw) -replace '^', ((Get-Date -Format MM/dd:) + "`n" + ("$note`n`n")) | Set-Content -Path "notes.txt" -Encoding utf8
 }
+  
