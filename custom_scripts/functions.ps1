@@ -239,7 +239,7 @@ function note ($note) {
 }
 
 function lss ($dir) {
-  $results = ls *$dir* -recurse
+  $results = Get-ChildItem *$dir* -recurse -Attributes Directory
   foreach ($match in $results) {
     Write-Host $match.FullName
   }
