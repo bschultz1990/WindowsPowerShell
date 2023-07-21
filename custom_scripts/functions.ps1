@@ -235,11 +235,20 @@ function strip ($file) {
 
 function note ($note) {
   while (-not $note) { $note = Read-Host "Note content" }
-  Add-Content -Path notes.txt -Value (Get-Date -Format MM/dd:), $note
+  Add-Content -Path notes.txt -Value (Get-Date -Format MM/dd:), $note`n
+  Get-Content notes.txt
+}
+
+function todo ($todo) {
+  while (-not $todo) { $todo = Read-Host "Todo content" }
+  Add-Content -Path todo.txt -Value $todo
+  nvim todo.txt +sort +wq
+  Clear-Host
+  bat todo.txt
 }
 
 function lss ($dir) {
-  $results = Get-ChildItem *$dir* -recurse -Attributes Directory
+  $results = Get-ChildItem *$dir* -recurse
   foreach ($match in $results) {
     Write-Host $match.FullName
   }
