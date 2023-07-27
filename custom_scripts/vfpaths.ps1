@@ -30,3 +30,5 @@ $smartwool_oda = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Sm
 $smartwool_lostarrow = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Lost Arrow -Japan 80032148\Invoices\2023"
 $smartwool_starlike = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Starlike - Taiwan 80061867\Invoices\2023"
 $altra_lotus = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1034 Altra\Lotus Corp - Japan 10743817\Invoices\2023"
+
+$kipling = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\9999 Kipling\Comercial Aste E Importadora - Brazil\Invoices"
