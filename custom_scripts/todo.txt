@@ -1,2 +1,0 @@
-Modify 'gn' to take a file argument. If included, get fullname of file.
-If not included, get fullname of current dir '.'
