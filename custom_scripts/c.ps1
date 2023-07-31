@@ -24,7 +24,8 @@ function c {
     }
     if ($response -match '^rn') {
       $arguments = $response -split ' '
-      rename $global:dirs_array[$arguments[1]] $global:dirs_array[$arguments[2]]
+      rename $global:dirs_array[$arguments[1]]
+      Clear-Host
     }
     if ($response -match '^cp') {
       $arguments = $response -split ' '
