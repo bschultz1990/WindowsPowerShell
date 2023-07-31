@@ -44,13 +44,13 @@ function c {
     }
     if ($response -match '^touch') {
       $arguments = $response -split ' '
-      $null = touch $arguments[1]
+      touch $arguments[1]
       Clear-Host
     }
     if ($response -match '^mkdir') {
       $arguments = $response -split ' '
       $innerArgs = $arguments[1..($arguments.Length - 1)]
-      $null = mkdir $innerArgs
+      mkdir $innerArgs
       Clear-Host
     }
     if ($response -match '^\d+') {
