@@ -1,1 +1,0 @@
-Beef up 'c' to allow directory selection via array.

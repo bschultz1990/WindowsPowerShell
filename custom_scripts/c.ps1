@@ -1,7 +1,7 @@
 # TODO: Include the following functions:
-# rn: rename
-# cp: copy 1 or more
-
+# Revamp the external function calling mode.
+# Highlight the last-visited item.
+# 
 function c {
   Clear-Host
   while ($true) {
@@ -13,17 +13,22 @@ function c {
     }
     Get-Location
     for ($i = 0; $i -lt $global:dirs_array.Length; $i++) {
+      if ($global:dirs_array[$i] -eq $last) {
+        Write-Host "$i  $($global:dirs_array[$i])" -BackgroundColor Blue -ForegroundColor Gray
+      }
       Write-Host "$i  $($global:dirs_array[$i])"
     }
     $response = Read-Host "Command: ? for a list"
-    # if ($response -eq '?') {
 
-    # }
     if ($response -eq 'q') {
       return
     }
+    if ($response -eq 'r') {
+      Clear-Host
+    }
     if ($response -match '^rn') {
       $arguments = $response -split ' '
+      Set-Clipboard $global:dirs_array[$arguments[1]]
       rename $global:dirs_array[$arguments[1]]
       Clear-Host
     }

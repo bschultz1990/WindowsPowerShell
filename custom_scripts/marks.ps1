@@ -23,7 +23,7 @@ function marks {
   }
 }
 
-function unmark {
+function mark_remove {
   marks -silent
   [int]$index = Read-Host "remove"
   $arrayList = [System.Collections.ArrayList]$global:mark_array
@@ -31,7 +31,7 @@ function unmark {
   $global:mark_array = $arrayList.ToArray()
 }
 
-function unmark_all {
+function marks_clear {
   $global:mark_array = @()
   Write-Host "Marks cleared."
 }
