@@ -12,13 +12,13 @@ function marks {
     [switch]$silent
   )
   if ($global:mark_array.Length -eq 0) {
-    Write-Host "No marks. Nothing to see here."
     return
   }
   for ($i = 0; $i -lt $global:mark_array.Length; $i++) {
     Write-Host "$i  $($global:mark_array[$i])"
   }
   if (!$silent) {
+    # $response = Read-Host "goto"
     goto $global:mark_array
   }
 }
