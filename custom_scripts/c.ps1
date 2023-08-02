@@ -1,7 +1,21 @@
 # TODO: Include the following functions:
 # Revamp the external function calling mode.
-# Highlight the last-visited item.
-# 
+# Implement search via /. Return all matches in a separate array OR highlight the search
+# result in the current directory array.
+
+# DONE:
+# Top directory line: blue text on black background
+# Make the index numbers a dark grey.
+# Include file / folder icons or colors in the dirs_array.
+
+# COLORS:
+# Highlight the last-visited item with a blue background and dark grey foreground.
+
+# Change 'rm" function to 'dd'.
+# Add a confirmation when deleting things! Make the user type 'yes' to confirm.
+# If the dirs_array won't fit on one column, use 2 or 3.
+# Add a file picking basket.
+
 function c {
   Clear-Host
   while ($true) {
@@ -11,14 +25,21 @@ function c {
     foreach ($dir in $dirs) {
       $global:dirs_array += $dir.Name
     }
-    Get-Location
+    $current_dir = (Get-Item .).FullName
+    Write-Host $current_dir -ForegroundColor Blue
     for ($i = 0; $i -lt $global:dirs_array.Length; $i++) {
-      if ($global:dirs_array[$i] -eq $last) {
-        Write-Host "$i  $($global:dirs_array[$i])" -BackgroundColor Blue -ForegroundColor Gray
+      if ($global:dirs_array[$i] -eq $global:last) {
+        Write-Host "$i  $($global:dirs_array[$i])" -BackgroundColor Blue -ForegroundColor Black
+        continue
       }
-      Write-Host "$i  $($global:dirs_array[$i])"
+      Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
+      if (-not (Test-Path -Path $global:dirs_array[$i] -PathType Leaf)) {
+        Write-Host "$($global:dirs_array[$i])" -ForegroundColor Blue
+      }
+      else { Write-Host "$($global:dirs_array[$i])" }
+
     }
-    $response = Read-Host "Command: ? for a list"
+    $response = Read-Host "Command"
 
     if ($response -eq 'q') {
       return
@@ -37,9 +58,20 @@ function c {
       cp $global:dirs_array[$arguments[1]] $global:dirs_array[$arguments[2]] -recurse
       Clear-Host
     }
-    if ($response -match '^rm') {
+    if ($response -match '^dd') {
       $arguments = $response -split ' '
-      rm $global:dirs_array[$arguments[1]]
+      $confirmed = $False
+      while ($confirmed -eq $False) {
+        $confirm = Read-Host "Are you sure? (yes/no)"
+        if ($confirm.ToLower() -eq 'yes') {
+          $confirmed = $True
+          rm $global:dirs_array[$arguments[1]]
+        }
+        elseif ($confirm.ToLower() -eq 'no') {
+          $confirmed = $True
+          break
+        }
+      }
       Clear-Host
     }
     if ($response -match '^mv') {
@@ -60,10 +92,12 @@ function c {
     }
     if ($response -match '^\d+') {
       if (Test-Path -Path $global:dirs_array[$response] -PathType Container) {
+        $global:last = ((Get-Item -Path $pwd).Name)
         Set-Location $global:dirs_array[$response]
         $global:dirs_array = @('..')
       }
       else {
+        $global:last = $global:dirs_array[$response]
         start $global:dirs_array[$response]
       }
       Clear-Host
