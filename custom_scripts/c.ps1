@@ -27,7 +27,7 @@ function c {
       # Highlight last visited directory
       elseif ($global:dirs_array[$i] -eq $global:last) {
         Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
-        Write-Host "$i  $($global:dirs_array[$i])" -BackgroundColor Blue -ForegroundColor Black
+        Write-Host "$($global:dirs_array[$i])" -BackgroundColor Blue -ForegroundColor Black
       }
       # Highlight directories
       elseif (-not (Test-Path -Path $global:dirs_array[$i] -PathType Leaf)) {
