@@ -7,7 +7,8 @@ function rename {
     $destination = Read-Host "Enter a new name or 'q' to quit"
   }
   if ("$destination" -eq "q") {
-    return
+    return $file
   }
   Rename-Item -Path "$file" -NewName "$destination"
+  return $destination
 }

@@ -20,6 +20,8 @@ function unzip ($file, $folder) {
 
   Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
   trash $file
-  c $folder
+  Clear-Host
+  cd $folder
+  ls
 }
 

@@ -1,46 +1,56 @@
-# TODO: Include the following functions:
-# Revamp the external function calling mode.
-# Implement search via /. Return all matches in a separate array OR highlight the search
+# TODO: Revamp the external function calling mode.
+
+# TODO:Implement search via /. Return all matches in a separate array OR highlight the search
 # result in the current directory array.
 
-# DONE:
-# Top directory line: blue text on black background
-# Make the index numbers a dark grey.
-# Include file / folder icons or colors in the dirs_array.
+# TODO:If the dirs_array won't fit on one column, use 2 or 3.
 
-# COLORS:
-# Highlight the last-visited item with a blue background and dark grey foreground.
-
-# Change 'rm" function to 'dd'.
-# Add a confirmation when deleting things! Make the user type 'yes' to confirm.
-# If the dirs_array won't fit on one column, use 2 or 3.
-# Add a file picking basket.
+# TODO:Add a file picking basket.
 
 function c {
   Clear-Host
   while ($true) {
     $global:dirs_array = @('..')
-    # $dirs = Get-ChildItem -Directory
     $dirs = Get-ChildItem
     foreach ($dir in $dirs) {
       $global:dirs_array += $dir.Name
     }
-    $current_dir = (Get-Item .).FullName
-    Write-Host $current_dir -ForegroundColor Blue
+    $header = (Get-Item .).FullName
+    Write-Host $header -ForegroundColor Blue
+
     for ($i = 0; $i -lt $global:dirs_array.Length; $i++) {
-      if ($global:dirs_array[$i] -eq $global:last) {
-        Write-Host "$i  $($global:dirs_array[$i])" -BackgroundColor Blue -ForegroundColor Black
-        continue
+      # Highlight search results
+      if (($searched -eq $True) -and $global:dirs_array[$i] -match $search) {
+        Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
+        Write-Host "$($global:dirs_array[$i])" -BackgroundColor Green -ForegroundColor Black
       }
-      Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
-      if (-not (Test-Path -Path $global:dirs_array[$i] -PathType Leaf)) {
+      # Highlight last visited directory
+      elseif ($global:dirs_array[$i] -eq $global:last) {
+        Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
+        Write-Host "$i  $($global:dirs_array[$i])" -BackgroundColor Blue -ForegroundColor Black
+      }
+      # Highlight directories
+      elseif (-not (Test-Path -Path $global:dirs_array[$i] -PathType Leaf)) {
+        Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
         Write-Host "$($global:dirs_array[$i])" -ForegroundColor Blue
       }
-      else { Write-Host "$($global:dirs_array[$i])" }
-
+      else { 
+        Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
+        Write-Host "$($global:dirs_array[$i])" 
+      }
     }
     $response = Read-Host "Command"
 
+    if ($response -eq 'noh') {
+      $searched = $False
+      Clear-Host
+    }
+    if ($response -match '^/') {
+      $arguments = $response -split '/'
+      $search = $arguments[1]
+      $searched = $True
+      Clear-Host
+    }
     if ($response -eq 'q') {
       return
     }
@@ -50,7 +60,7 @@ function c {
     if ($response -match '^rn') {
       $arguments = $response -split ' '
       Set-Clipboard $global:dirs_array[$arguments[1]]
-      rename $global:dirs_array[$arguments[1]]
+      $global:last = rename $global:dirs_array[$arguments[1]]
       Clear-Host
     }
     if ($response -match '^cp') {
@@ -86,8 +96,8 @@ function c {
     }
     if ($response -match '^mkdir') {
       $arguments = $response -split ' '
-      $innerArgs = $arguments[1..($arguments.Length - 1)]
-      mkdir $innerArgs
+      mkdir $arguments[1]
+      $global:last = $arguments[1]
       Clear-Host
     }
     if ($response -match '^\d+') {
