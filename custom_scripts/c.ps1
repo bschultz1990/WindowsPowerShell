@@ -100,6 +100,12 @@ function c {
       $global:last = $arguments[1]
       Clear-Host
     }
+    if ($response -eq 'b'){
+        $global:last = ((Get-Item -Path $pwd).Name)
+        $global:dirs_array = @('..')
+        Set-Location ..
+        Clear-Host
+            }
     if ($response -match '^\d+') {
       if (Test-Path -Path $global:dirs_array[$response] -PathType Container) {
         $global:last = ((Get-Item -Path $pwd).Name)
