@@ -7,8 +7,11 @@ function singlepage($pdfPath) {
 	return $false
 }
 
+# (Get-Item *.pdf).Count
+
 function watermarks {
 	if (-not (Test-Path originals)) { mkdir originals }
+	if (-not (Test-Path temp)) { mkdir temp }
 	Copy-Item -Path *.pdf -Destination originals
 
 	foreach ($pdf in (Get-Item *.pdf)) {
@@ -22,19 +25,21 @@ function watermarks {
 			continue
 		}
 
-		# Write-Host "Removing last page from $pdf"
+		Write-Host "Removing last page from $pdf"
 		pdftk $pdf cat 1-r2 output stripped.pdf
 
-		# Write-Host "Duplicating last page."
+		Write-Host "Duplicating last page."
 		pdftk $pdf cat end output temp.pdf
 
-		# Write-Host "Making watermark."
+		Write-Host "Making watermark."
 		pdftk temp.pdf background $wm_vans output wm.pdf
 
-		# Write-Host "Joining stripped.pdf and wm.pdf."
+		Write-Host "Joining stripped.pdf and wm.pdf."
 		pdftk stripped.pdf wm.pdf cat output $pdf
 
-		# Write-Host "Cleaning..."
-		Remove-Item -Path stripped.pdf, temp.pdf, wm.pdf
+		Write-Host "Done!"
+		if (stripped.pdf) { Move-Item -Path stripped.pdf -Destination temp -Force }
+		if (temp.pdf) { Move-Item -Path temp.pdf -Destination temp -Force }
+		if (wm.pdf) { Move-Item -Path wm.pdf -Destination temp -Force }
 	}
 }

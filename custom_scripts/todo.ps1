@@ -4,9 +4,9 @@ function todo {
   param ( [switch]$v, [switch]$e, [switch]$h)
 
   if ($h) {
-    Write-Host "todo 'note here'" 
+    Write-Host "todo 'note here'"
     Write-Host "or todo -flag"
-    Write-Host "-v: view todos" 
+    Write-Host "-v: view todos"
     Write-Host "-e: edit todos file"
     return
   }
