@@ -1,11 +1,8 @@
-# TODO: Revamp the external function calling mode.
+# TODO: #3 Revamp the external function calling mode.
 
-# TODO:Implement search via /. Return all matches in a separate array OR highlight the search
-# result in the current directory array.
+# TODO:If #2 the dirs_array won't fit on one column, use 2 or 3.
 
-# TODO:If the dirs_array won't fit on one column, use 2 or 3.
-
-# TODO:Add a file picking basket.
+# TODO:Add #1 a file picking basket.
 
 function c {
   Clear-Host
@@ -100,12 +97,12 @@ function c {
       $global:last = $arguments[1]
       Clear-Host
     }
-    if ($response -eq 'b'){
-        $global:last = ((Get-Item -Path $pwd).Name)
-        $global:dirs_array = @('..')
-        Set-Location ..
-        Clear-Host
-            }
+    if ($response -eq 'b') {
+      $global:last = ((Get-Item -Path $pwd).Name)
+      $global:dirs_array = @('..')
+      Set-Location ..
+      Clear-Host
+    }
     if ($response -match '^\d+') {
       if (Test-Path -Path $global:dirs_array[$response] -PathType Container) {
         $global:last = ((Get-Item -Path $pwd).Name)
