@@ -1,7 +1,5 @@
-# TODO: #3 Revamp the external function calling mode.
-
+# TODO: Revamp the external function calling mode.
 # TODO:If #2 the dirs_array won't fit on one column, use 2 or 3.
-
 # TODO:Add #1 a file picking basket.
 
 function c {
@@ -111,7 +109,7 @@ function c {
       }
       else {
         $global:last = $global:dirs_array[$response]
-        start $global:dirs_array[$response]
+        Start-Process $global:dirs_array[$response]
       }
       Clear-Host
     }

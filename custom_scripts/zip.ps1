@@ -1,4 +1,3 @@
-# FIXME:
 function zip { 
   param (
     [CmdletBinding()]
@@ -8,10 +7,7 @@ function zip {
   while (! $zipfile) {
     $zipfile = Read-Host "Enter folder name."
   }
-  $files2 = $files.replace(" ", ",")
-  Write-Host $files
-  Write-Host $files2
-  # Compress-Archive -Path "$files2" -DestinationPath ("$pwd" + "\" + "$zipfile" + ".zip")
+  Compress-Archive -Path $files -DestinationPath ("$pwd" + "\" + "$zipfile" + ".zip")
 }
 
 function unzip ($file, $folder) {
@@ -21,7 +17,6 @@ function unzip ($file, $folder) {
   Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
   trash $file
   Clear-Host
-  cd $folder
-  ls
+  Set-Location $folder
+  Get-ChildItem
 }
-
