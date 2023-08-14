@@ -1,1 +1,4 @@
-function cwd { Set-Clipboard (getdir) }
+function cwd {
+  Set-Clipboard (getdir) 
+  return getdir
+}
