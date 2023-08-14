@@ -15,7 +15,7 @@ function unzip ($file, $folder) {
   if (!$folder) { $folder = Read-Host "Enter folder name" }
 
   Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
-  trash $file
+  Remove-Item $file
   Clear-Host
   Set-Location $folder
   Get-ChildItem
