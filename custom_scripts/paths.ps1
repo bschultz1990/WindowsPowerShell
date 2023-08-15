@@ -1,8 +1,3 @@
-$lfrc = "~\AppData\Local\lf\lfrc"
-$pwshconfig = "~\Documents\WindowsPowerShell"
-$dl = "~\Downloads"
-$dt = "~\Desktop"
-$wm_vans = "~\OneDrive - VFC Corp\Documents\Stamps\pdf\Vans.pdf"
 
 function paths {
   $content = Get-Content $pwshconfig/custom_scripts/vfpaths.ps1
