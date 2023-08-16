@@ -45,20 +45,14 @@ function folderme {
 
   $prefix = (Get-Variable -Name $company -ValueOnly).$brand.prefix
   $suffix = (Get-Variable -Name $company -ValueOnly).$brand.suffix
-
-  return ($prefix, $suffix)
-
   $regex = $prefix, "(.+?)", $suffix -join ""
   # Write-Host "regex is: $regex"
-
-  $prename = Read-Host "What would you like before your new folder name? (leave blank to skip)"
-  $postname = Read-Host "How about after? (leave blank to skip)"
 
   $uniqueMatches = @{}  # create hashtable to store unique matches
 
   foreach ($file in $files) {
     if ($file.Name -match "$regex") {
-      $newFolderName = "$prename", $Matches[1], "$postname" -join ""
+      $newFolderName = $Matches[1], "_NEW" -join ""
       $newFolderPath = Join-Path -Path $FolderPath -ChildPath $newFolderName
 
       # check if folder name already exists in hashtable
@@ -69,11 +63,10 @@ function folderme {
         # create new folder and add to hashtable
         if (-not (Test-Path -Path $newFolderPath)) {
           New-Item -ItemType Directory -Path $newFolderPath | Out-Null
-          Write-Host $newFolderPath
+          Write-Host $newFolderName
         }
         $uniqueMatches[$newFolderName] = $newFolderPath
       }
-
       Move-Item -Path $file.FullName -Destination $newFolderPath
     }
   }
