@@ -1,17 +1,53 @@
 function folderme {
   param (
     [string]$FolderPath,
+    [string]$company,
+    [string]$brand
   )
   if (-not ("$FolderPath")) {
     $FolderPath = "."
-    }
+  }
   Write-Host "Processing in $FolderPath"
+  if (-not ("$company")) {
+    $company = Read-Host "Company"
+  }
+  if (-not ("$brand")) {
+    $brand = Read-Host "Brand"
+  }
 
-  $ext = "*.", "pdf" -join ""
-  $files = Get-ChildItem -Path $FolderPath -Filter $ext -File
+  $company = $company.ToLower()
+  $brand = $brand.ToLower()
 
-  $prefix = Read-Host "What is before your match?"
-  $suffix = Read-Host "What is immediately after your match?"
+  $tnf = @{
+    komax = @{
+      prefix = 'TNF '
+      suffix = ' KOMAX'
+    }
+  }
+  $smartwool = @{
+    starlike = @{
+      prefix = 'SW '
+      suffix = ' STARLIKE'
+    }
+  }
+  $vans = @{
+    grimuru = @{
+      prefix = 'VN '
+      suffix = ' GRIMURU'
+    }
+    forus   = @{
+      prefix = 'VN '
+      suffix = ' FORUS'
+    }
+  }
+
+  $files = Get-ChildItem -Path $FolderPath -Filter *.pdf -File
+
+  $prefix = (Get-Variable -Name $company -ValueOnly).$brand.prefix
+  $suffix = (Get-Variable -Name $company -ValueOnly).$brand.suffix
+
+  return ($prefix, $suffix)
+
   $regex = $prefix, "(.+?)", $suffix -join ""
   # Write-Host "regex is: $regex"
 
@@ -28,16 +64,17 @@ function folderme {
       # check if folder name already exists in hashtable
       if ($uniqueMatches.ContainsKey($newFolderName)) {
         $newFolderPath = $uniqueMatches[$newFolderName]  # use existing folder path
-        } else {
-          # create new folder and add to hashtable
-          if (-not (Test-Path -Path $newFolderPath)) {
-            New-Item -ItemType Directory -Path $newFolderPath | Out-Null
-            Write-Host $newFolderPath
-          }
-          $uniqueMatches[$newFolderName] = $newFolderPath
-        }
-
-        Move-Item -Path $file.FullName -Destination $newFolderPath
       }
+      else {
+        # create new folder and add to hashtable
+        if (-not (Test-Path -Path $newFolderPath)) {
+          New-Item -ItemType Directory -Path $newFolderPath | Out-Null
+          Write-Host $newFolderPath
+        }
+        $uniqueMatches[$newFolderName] = $newFolderPath
+      }
+
+      Move-Item -Path $file.FullName -Destination $newFolderPath
     }
   }
+}
