@@ -1,16 +1,11 @@
 function folderme {
   param (
     [string]$FolderPath,
-    [string]$co_brand
   )
   if (-not ("$FolderPath")) {
     $FolderPath = "."
     }
   Write-Host "Processing in $FolderPath"
-
-  if (-not ("$co_brand")) {
-    $co_brand = Read-Host "Provide a company and brand to continue"
-    }
 
   $ext = "*.", "pdf" -join ""
   $files = Get-ChildItem -Path $FolderPath -Filter $ext -File
