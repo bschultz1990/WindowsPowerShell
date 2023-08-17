@@ -42,7 +42,6 @@ function folderme {
   }
 
   $files = Get-ChildItem -Path $FolderPath -Filter *.pdf -File
-
   $prefix = (Get-Variable -Name $company -ValueOnly).$brand.prefix
   $suffix = (Get-Variable -Name $company -ValueOnly).$brand.suffix
   $regex = $prefix, "(.+?)", $suffix -join ""
