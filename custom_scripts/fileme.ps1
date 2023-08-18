@@ -38,4 +38,8 @@ function fileme {
   Write-Host "Moving TNF COMERCIAL to $tnf_comercial_edit"
   Move-Item *TNF*IMPORTADORA*.pdf $tnf_comercial_edit
   folderme $tnf_comercial_edit tnf comercial
+
+  Write-Host "Moving VN Arezzo to $vans_arezzo_edit"
+  Move-Item *VN*AREZZO*.pdf $vans_arezzo_edit
+  folderme $vans_arezzo_edit vans arezzo
 }

@@ -29,23 +29,27 @@ function folderme {
       }
       komax_peru = @{
         prefix = 'TNF'
-          suffix = ' KOMAX PERU'
+        suffix = ' KOMAX PERU'
       }
     }
   $smartwool = @{
     starlike = @{
       prefix = 'SW '
-        suffix = ' STARLIKE'
+      suffix = ' STARLIKE'
     }
   }
   $vans = @{
     grimuru = @{
       prefix = 'VN '
-        suffix = ' GRIMURU'
+      suffix = ' GRIMURU'
     }
     forus   = @{
       prefix = 'VN '
-        suffix = ' FORUS'
+      suffix = ' FORUS'
+    }
+    arezzo   = @{
+      prefix = 'VN '
+      suffix = ' AREZZO'
     }
   }
 
