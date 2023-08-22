@@ -1,4 +1,4 @@
 function cwd {
-  Set-Clipboard (getdir) 
-  return getdir
+  Set-Clipboard $((Get-Item .).fullname)
+  return
 }

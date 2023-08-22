@@ -22,6 +22,7 @@ $smartwool_lostarrow = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1
 $smartwool_lostarrow_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\LOST ARROW"
 $smartwool_oda = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Outdoor Agency - Australia 80070847\Invoices\2023"
 $smartwool_starlike = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Starlike - Taiwan 80061867\Invoices\2023"
+$tnf_adoc = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\ADOC\Invoices\2023 Invoices"
 $tnf_comercial_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\TNF COMERCIAL E IMPORTADORA LTDA"
 $tnf_grimoldi = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Grimoldi - Argentina 10757570\Invoices\2023 Invoices"
 $tnf_justus = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Just Us S.A\Invoices & Documents\2023 Invoices"
