@@ -20,6 +20,11 @@ function fileme {
     Write-Host "Archiving VANS Forus to $vans_forus"
     Move-Item "*VN*FORUS*.pdf" $vans_forus
   }
+
+  if (Test-Path -Path "./*JS*FORUS*.pdf" -PathType leaf) {
+    Write-Host "Archiving VANS Forus to $jansport_forus"
+    Move-Item "*JS*FORUS*.pdf" $jansport_forus
+  }
   
   if (Test-Path -Path "./*KOMAX*SA *.pdf" -PathType leaf) {
     Write-Host "Archiving TNF Komax SA (Chile) to $tnf_komax_chile"
@@ -31,14 +36,14 @@ function fileme {
     Move-Item "*KOMAX PERU*.pdf" $tnf_komax_peru
   }
 
-  if (Test-Path -Path "./*LOST ARROW*.pdf" -PathType leaf) {
+  if (Test-Path -Path "./SMARTWOOL*LOST ARROW*.pdf" -PathType leaf) {
     Write-Host "Moving Lost Arrow to $smartwool_lostarrow_edit"
     Move-Item "*LOST ARROW*.pdf" $smartwool_lostarrow_edit
   }
 
   if (Test-Path -Path "./*STARLIKE*.pdf" -PathType leaf) {
-    Write-Host "Archiving SW Starlike to $smartwool_starlike"
-    Move-Item *SW*STARLIKE*.pdf $smartwool_starlike
+    Write-Host "Archiving SW Starlike to $smartwool_starlike_edit"
+    Move-Item *SW*STARLIKE*.pdf $smartwool_starlike_edit
   }
 
   if (Test-Path -Path "./*VN*GRIMURU*.pdf" -PathType leaf) {
