@@ -3,7 +3,6 @@ function fileme {
   while ($confirmed -eq $false) {
     Write-Host "=== IMPORTANT! Complete all of the following before continuing:===`n"
     "[ ] Remove all Starlike orders that are USDC"
-    "[ ] LOST ARROW: Move all USDC invoices to $smartwool_lostarrow_edit`n"
 
     $response = Read-Host "Have you completed all of the above? (yes/no)"
 
@@ -33,8 +32,8 @@ function fileme {
   }
 
   if (Test-Path -Path "./*LOST ARROW*.pdf" -PathType leaf) {
-    Write-Host "Archiving Lost Arrow to $smartwool_lostarrow"
-    Move-Item "*LOST ARROW*.pdf" $smartwool_lostarrow
+    Write-Host "Moving Lost Arrow to $smartwool_lostarrow_edit"
+    Move-Item "*LOST ARROW*.pdf" $smartwool_lostarrow_edit
   }
 
   if (Test-Path -Path "./*STARLIKE*.pdf" -PathType leaf) {
