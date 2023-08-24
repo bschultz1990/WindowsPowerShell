@@ -3,7 +3,16 @@
 # TODO:Add #1 a file picking basket.
 
 function c {
-  Clear-Host
+  param ( [string]$working_directory = "." )
+    Clear-Host
+  try {
+    Set-Location $working_directory -ErrorAction Stop
+  }
+  catch {
+    Write-Error "Error: Path does not exist or is not accessible."
+    return
+  }
+
   while ($true) {
     $global:dirs_array = @('..')
     $dirs = Get-ChildItem
