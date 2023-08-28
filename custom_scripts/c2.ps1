@@ -1,9 +1,9 @@
-# TODO: Revamp the external function calling mode.
-# TODO:If #2 the dirs_array won't fit on one column, use 2 or 3.
-# TODO:Add #1 a file picking basket.
+function c2 {
+  param (
+    [string]$working_directory = ".",
+    [int]$page = 1
+  )
 
-function c {
-  param ( [string]$working_directory = "." )
   Clear-Host
   try {
     Set-Location $working_directory -ErrorAction Stop
@@ -19,10 +19,20 @@ function c {
     foreach ($dir in $dirs) {
       $global:dirs_array += $dir.Name
     }
+    $console_height = $host.UI.RawUI.WindowSize.Height
+    $items_per_page = $console_height - 3
+
     $header = (Get-Item .).FullName
     Write-Host $header -ForegroundColor Blue
 
-    for ($i = 0; $i -lt $global:dirs_array.Length; $i++) {
+    $start_index = ($page - 1) * $items_per_page
+    $end_index = $start_index + $items_per_page
+
+    for ($i = $start_index; $i -lt $end_index; $i++) {
+      if ($i -ge $global:dirs_array.Length) {
+        break
+      }
+
       # Highlight search results
       if (($searched -eq $True) -and $global:dirs_array[$i] -match $search) {
         Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
@@ -43,7 +53,32 @@ function c {
         Write-Host "$($global:dirs_array[$i])" 
       }
     }
+
+    # Check if there are more items beyond the current page
+    if ($end_index -lt $global:dirs_array.Length) {
+      Write-Host "Page Down: Press 'd' to go to the next page."
+    }
+
+    # Check if there are previous items before the current page
+    if ($start_index -gt 0) {
+      Write-Host "Page Up: Press 'a' to go to the previous page."
+    }
+
     $response = Read-Host "Command"
+
+    # Handle page navigation commands
+    if ($response -eq 'd') {
+      # Go to the next page
+      $page++
+      Clear-Host
+      continue
+    }
+    elseif ($response -eq 'a') {
+      # Go to the previous page
+      $page--
+      Clear-Host
+      continue
+    }
 
     if ($response -eq 'noh') {
       $searched = $False
@@ -122,5 +157,16 @@ function c {
       }
       Clear-Host
     }
+
+
+    if ($response -eq 'q') {
+      return
+    }
+    if ($response -eq 'r') {
+      Clear-Host
+    }
+
+    # Rest of the command handling code...
+    # (Please refer to the original function for the remaining code)
   }
 }
