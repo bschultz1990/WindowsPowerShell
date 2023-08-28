@@ -1,43 +1,84 @@
 function folderme {
   param (
-    [string]$FolderPath,
-  )
-  if (-not ("$FolderPath")) {
-    $FolderPath = "."
+      [string]$FolderPath,
+      [string]$company,
+      [string]$brand
+      )
+    if (-not ("$FolderPath")) {
+      $FolderPath = "."
     }
   Write-Host "Processing in $FolderPath"
+    if (-not ("$company")) {
+      $company = Read-Host "Company"
+    }
+  if (-not ("$brand")) {
+    $brand = Read-Host "Brand"
+  }
 
-  $ext = "*.", "pdf" -join ""
-  $files = Get-ChildItem -Path $FolderPath -Filter $ext -File
+  $company = $company.ToLower()
+    $brand = $brand.ToLower()
 
-  $prefix = Read-Host "What is before your match?"
-  $suffix = Read-Host "What is immediately after your match?"
-  $regex = $prefix, "(.+?)", $suffix -join ""
-  # Write-Host "regex is: $regex"
-
-  $prename = Read-Host "What would you like before your new folder name? (leave blank to skip)"
-  $postname = Read-Host "How about after? (leave blank to skip)"
-
-  $uniqueMatches = @{}  # create hashtable to store unique matches
-
-  foreach ($file in $files) {
-    if ($file.Name -match "$regex") {
-      $newFolderName = "$prename", $Matches[1], "$postname" -join ""
-      $newFolderPath = Join-Path -Path $FolderPath -ChildPath $newFolderName
-
-      # check if folder name already exists in hashtable
-      if ($uniqueMatches.ContainsKey($newFolderName)) {
-        $newFolderPath = $uniqueMatches[$newFolderName]  # use existing folder path
-        } else {
-          # create new folder and add to hashtable
-          if (-not (Test-Path -Path $newFolderPath)) {
-            New-Item -ItemType Directory -Path $newFolderPath | Out-Null
-            Write-Host $newFolderPath
-          }
-          $uniqueMatches[$newFolderName] = $newFolderPath
+    $tnf = @{
+      comercial = @{
+        prefix = 'TNF '
+        suffix = ' TNF COMERCIAL'
         }
+      komax_chile = @{
+        prefix = 'TNF '
+          suffix = ' KOMAX SA'
+      }
+      komax_peru = @{
+        prefix = 'TNF'
+        suffix = ' KOMAX PERU'
+      }
+    }
+  $smartwool = @{
+    starlike = @{
+      prefix = 'SW '
+      suffix = ' STARLIKE'
+    }
+  }
+  $vans = @{
+    grimuru = @{
+      prefix = 'VN '
+      suffix = ' GRIMURU'
+    }
+    forus   = @{
+      prefix = 'VN '
+      suffix = ' FORUS'
+    }
+    arezzo   = @{
+      prefix = 'VN '
+      suffix = ' AREZZO'
+    }
+  }
 
+  $files = Get-ChildItem -Path $FolderPath -Filter *.pdf -File
+    $prefix = (Get-Variable -Name $company -ValueOnly).$brand.prefix
+    $suffix = (Get-Variable -Name $company -ValueOnly).$brand.suffix
+    $regex = $prefix, "(.+?)", $suffix -join ""
+# Write-Host "regex is: $regex"
+
+    $uniqueMatches = @{}  # create hashtable to store unique matches
+
+    foreach ($file in $files) {
+      if ($file.Name -match "$regex") {
+        $newFolderName = $Matches[1], "_NEW" -join ""
+          $newFolderPath = Join-Path -Path $FolderPath -ChildPath $newFolderName
+
+# check if folder name already exists in hashtable
+          if ($uniqueMatches.ContainsKey($newFolderName)) {
+            $newFolderPath = $uniqueMatches[$newFolderName]  # use existing folder path
+          }
+          else {
+# create new folder and add to hashtable
+            if (-not (Test-Path -Path $newFolderPath)) {
+              New-Item -ItemType Directory -Path $newFolderPath | Out-Null
+                Write-Host $newFolderName
+            }
+            $uniqueMatches[$newFolderName] = $newFolderPath
+          }
         Move-Item -Path $file.FullName -Destination $newFolderPath
       }
     }
-  }
+}

@@ -1,18 +1,12 @@
-function zip { 
-  param (
-    [CmdletBinding()]
-    [Parameter(Mandatory = $true, position = 0, ValueFromRemainingArguments = $true)]
-    [String[]]$files
-  )
-  while (! $zipfile) {
-    $zipfile = Read-Host "Enter folder name."
-  }
+function zip ($files, $zipfile) { 
+  while (!$files) { $files = Read-Host "Enter files to unzip" }
+  while (!$zipfile) { $zipfile = Read-Host "Enter folder name" }
   Compress-Archive -Path $files -DestinationPath ("$pwd" + "\" + "$zipfile" + ".zip")
 }
 
 function unzip ($file, $folder) {
-  if (!$file) { $file = Read-Host "Enter zip file name" }
-  if (!$folder) { $folder = Read-Host "Enter folder name" }
+  while (!$file) { $file = Read-Host "Enter a file to unzip" }
+  while (!$folder) { $folder = Read-Host "Enter a folder to unzip into" }
 
   Expand-Archive -Path "$file" -DestinationPath $pwd\$folder
   Remove-Item $file
