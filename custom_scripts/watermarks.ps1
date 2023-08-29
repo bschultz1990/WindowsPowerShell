@@ -1,11 +1,13 @@
 function singlepage($pdfPath) {
-	$dumpOutput = pdftk $pdfPath dump_data
-	$pageCount = $dumpOutput | Select-String -Pattern "NumberOfPages" | ForEach-Object { $_.ToString().Split(':')[1].Trim() }
-	if ($pageCount -eq "1") {
+	if (pageCount -eq "1") {
 		return $true
 	}
 	return $false
 }
+
+function pageCount {
+  return pdftk $pdfPath dump_data | Select-String -Pattern "NumberOfPages" | ForEach-Object { $_.ToString().Split(':')[1].Trim() }
+  }
 
 # (Get-Item *.pdf).Count
 

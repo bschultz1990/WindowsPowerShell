@@ -1,7 +1,7 @@
 function zip ($files, $zipfile) { 
-  while (!$files) { $files = Read-Host "Enter files to unzip" }
+  while (!$files) { $files = Read-Host "Enter files to zip" }
   while (!$zipfile) { $zipfile = Read-Host "Enter folder name" }
-  Compress-Archive -Path $files -DestinationPath ("$pwd" + "\" + "$zipfile" + ".zip")
+  Compress-Archive -Path $files -DestinationPath $pwd\$zipfile".zip"
 }
 
 function unzip ($file, $folder) {
