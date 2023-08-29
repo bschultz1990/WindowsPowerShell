@@ -31,6 +31,10 @@ function folderme {
         prefix = 'TNF'
         suffix = ' KOMAX PERU'
       }
+      justus = @{
+        prefix = 'TNF'
+        suffix = ' JUST US'
+        }
     }
   $smartwool = @{
     starlike = @{
@@ -51,20 +55,24 @@ function folderme {
       prefix = 'VN '
       suffix = ' AREZZO'
     }
+    grimoldi   = @{
+      prefix = 'VN '
+      suffix = ' GRIMOLDI'
+    }
   }
 
   $files = Get-ChildItem -Path $FolderPath -Filter *.pdf -File
-    $prefix = (Get-Variable -Name $company -ValueOnly).$brand.prefix
-    $suffix = (Get-Variable -Name $company -ValueOnly).$brand.suffix
-    $regex = $prefix, "(.+?)", $suffix -join ""
+  $prefix = (Get-Variable -Name $company -ValueOnly).$brand.prefix
+  $suffix = (Get-Variable -Name $company -ValueOnly).$brand.suffix
+  $regex = $prefix, "(.+?)", $suffix -join ""
 # Write-Host "regex is: $regex"
 
-    $uniqueMatches = @{}  # create hashtable to store unique matches
+  $uniqueMatches = @{}  # create hashtable to store unique matches
 
     foreach ($file in $files) {
       if ($file.Name -match "$regex") {
         $newFolderName = $Matches[1], "_NEW" -join ""
-          $newFolderPath = Join-Path -Path $FolderPath -ChildPath $newFolderName
+        $newFolderPath = Join-Path -Path $FolderPath -ChildPath $newFolderName
 
 # check if folder name already exists in hashtable
           if ($uniqueMatches.ContainsKey($newFolderName)) {

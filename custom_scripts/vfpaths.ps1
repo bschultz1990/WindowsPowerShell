@@ -36,5 +36,5 @@ $vans_grimoldi = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Va
 $vans_grimoldi_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI"
 $vans_grimuru = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimuru - Uruguay 10761571\Invoices\2023"
 $vans_grimuru_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMURU"
-$vans_justus_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI-JUST US"
+$justus_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI-JUST US"
 $wm_vans = "~\OneDrive - VFC Corp\Documents\Stamps\pdf\Vans.pdf"

@@ -11,6 +11,7 @@ function fileme {
     }
     elseif ($response.ToLower() -eq 'yes') {
       $confirmed = $true
+      Write-Host ""
     }
     else {
       Write-Host "Invalid input. Please enter 'yes' or 'no'."
@@ -63,4 +64,17 @@ function fileme {
     Move-Item "*VN*AREZZO*.pdf" $vans_arezzo_edit
     folderme $vans_arezzo_edit vans arezzo
   }
+
+  if (Test-Path -Path "./TNF*JUST*US*" -PathType leaf) {
+    Write-Host "Moving TNF JUST US to $justus_edit"
+    Move-Item "TNF*JUST*US*" $justus_edit
+    folderme $justus_edit tnf justus
+  }
+
+  if (Test-Path -Path "./VN*GRIMOLDI*" -PathType leaf) {
+    Write-Host "Moving VN GRIMOLDI" to $vans_grimoldi_edit
+    Move-Item "VN*GRIMOLDI*" $vans_grimoldi_edit
+    folderme $vans_grimoldi_edit vans grimoldi
+    }
+
 }
