@@ -2,7 +2,7 @@ function fileme {
   $confirmed = $false
   while ($confirmed -eq $false) {
     Write-Host "=== IMPORTANT! Complete all of the following before continuing:===`n"
-    "[ ] Remove all Starlike orders that are USDC"
+    "[ ] Remove all Starlike orders that are USDC`n"
 
     $response = Read-Host "Have you completed all of the above? (yes/no)"
 
@@ -37,14 +37,14 @@ function fileme {
     Move-Item "*KOMAX PERU*.pdf" $tnf_komax_peru
   }
 
-  if (Test-Path -Path "./SMARTWOOL*LOST ARROW*.pdf" -PathType leaf) {
+  if (Test-Path -Path "./SW*LOST ARROW*.pdf" -PathType leaf) {
     Write-Host "Moving Lost Arrow to $smartwool_lostarrow_edit"
-    Move-Item "*LOST ARROW*.pdf" $smartwool_lostarrow_edit
+    Move-Item "SW*LOST ARROW*.pdf" $smartwool_lostarrow_edit
   }
 
   if (Test-Path -Path "./*STARLIKE*.pdf" -PathType leaf) {
     Write-Host "Archiving SW Starlike to $smartwool_starlike_edit"
-    Move-Item *SW*STARLIKE*.pdf $smartwool_starlike_edit
+    Move-Item "*SW*STARLIKE*.pdf" $smartwool_starlike_edit
   }
 
   if (Test-Path -Path "./*VN*GRIMURU*.pdf" -PathType leaf) {
@@ -75,6 +75,6 @@ function fileme {
     Write-Host "Moving VN GRIMOLDI" to $vans_grimoldi_edit
     Move-Item "VN*GRIMOLDI*" $vans_grimoldi_edit
     folderme $vans_grimoldi_edit vans grimoldi
-    }
+  }
 
 }
