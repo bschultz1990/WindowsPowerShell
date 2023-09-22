@@ -166,7 +166,5 @@ function c2 {
       Clear-Host
     }
 
-    # Rest of the command handling code...
-    # (Please refer to the original function for the remaining code)
   }
 }

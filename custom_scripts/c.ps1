@@ -76,6 +76,7 @@ function c {
       $arguments = $response -split ' '
       $confirmed = $False
       while ($confirmed -eq $False) {
+        Write-Host "Delete '$($global:dirs_array[$arguments[1]])'" -BackgroundColor Red -ForegroundColor White
         $confirm = Read-Host "Are you sure? (yes/no)"
         if ($confirm.ToLower() -eq 'yes') {
           $confirmed = $True

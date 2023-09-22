@@ -17,6 +17,13 @@ function fileme {
       Write-Host "Invalid input. Please enter 'yes' or 'no'."
     }
   }
+
+  function moveme ($path, $destination) {
+      if (Test-Path -Path $path -PathType leaf) {
+        Move-Item $path $destination -PassThru
+      }
+    }
+
   if (Test-Path -Path "./*VN*FORUS*.pdf" -PathType leaf) {
     Write-Host "Archiving VANS Forus to $vans_forus"
     Move-Item "*VN*FORUS*.pdf" $vans_forus
@@ -72,9 +79,9 @@ function fileme {
   }
 
   if (Test-Path -Path "./VN*GRIMOLDI*" -PathType leaf) {
-    Write-Host "Moving VN GRIMOLDI" to $vans_grimoldi_edit
-    Move-Item "VN*GRIMOLDI*" $vans_grimoldi_edit
-    folderme $vans_grimoldi_edit vans grimoldi
+    Write-Host "Moving TNF JUST US to $justus_edit"
+    Move-Item "TNF*JUST*US*" $justus_edit
+    folderme $justus_edit vans grimoldi
   }
 
 }
