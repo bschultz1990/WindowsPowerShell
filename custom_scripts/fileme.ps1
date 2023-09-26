@@ -24,16 +24,31 @@ function fileme {
       }
     }
 
+  if (Test-Path -Path "./*ABDULWAHAB*.pdf" -PathType leaf) {
+    Write-Host "Moving Ali Abdulwahab to $invoices/Ali Abdulwahab Al Mutawa"
+    Move-Item "./*ABDULWAHAB*.pdf" "$invoices/Ali Abdulwahab Al Mutawa"
+  }
+
   if (Test-Path -Path "./*VN*FORUS*.pdf" -PathType leaf) {
     Write-Host "Archiving VANS Forus to $vans_forus"
     Move-Item "*VN*FORUS*.pdf" $vans_forus
   }
 
   if (Test-Path -Path "./*JS*FORUS*.pdf" -PathType leaf) {
-    Write-Host "Archiving VANS Forus to $jansport_forus"
+    Write-Host "Archiving JanSport Forus to $jansport_forus"
     Move-Item "*JS*FORUS*.pdf" $jansport_forus
   }
   
+  if (Test-Path -Path "./*JS*SAVE COMERCIAL E IMPORTADORA LTDA*.pdf" -PathType leaf) {
+    Write-Host "Archiving JS SAVE... to $jansport_save"
+    Move-Item "./*JS*SAVE COMERCIAL E IMPORTADORA LTDA*.pdf" $jansport_save
+  }
+
+  if (Test-Path -Path "./*JS*SMASH TRADING*.pdf" -PathType leaf) {
+    Write-Host "Moving SMASH TRADING to $invoices/SMASH TRADING"
+    Move-Item "./*JS*SMASH TRADING*.pdf" "$invoices/SMASH TRADING"
+    }
+
   if (Test-Path -Path "./*KOMAX*SA *.pdf" -PathType leaf) {
     Write-Host "Archiving TNF Komax SA (Chile) to $tnf_komax_chile"
     Move-Item "*KOMAX*SA *.pdf" $tnf_komax_chile
