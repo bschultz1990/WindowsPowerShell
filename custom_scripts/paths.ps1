@@ -9,3 +9,7 @@ function paths {
   }
   Write-Output ($table)
 }
+
+function path {
+  open "$pwshconfig/custom_scripts/vfpaths.ps1"
+  }

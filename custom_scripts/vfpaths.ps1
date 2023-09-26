@@ -1,3 +1,4 @@
+$ali_abdulwahab = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1001 JanSport\Ali Abdulwahab Al Mutawa - Kuwait 80010809\Invoices"
 $altra_lotus = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1034 Altra\Lotus Corp - Japan 10743817\Invoices\2023"
 $attachments = "~\OneDrive - VFC Corp\Attachments"
 $ch = "\\Client\C$\Users\bschult3"
