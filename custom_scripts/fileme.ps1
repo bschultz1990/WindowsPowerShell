@@ -19,10 +19,10 @@ function fileme {
   }
 
   function moveme ($path, $destination) {
-      if (Test-Path -Path $path -PathType leaf) {
-        Move-Item $path $destination -PassThru
-      }
+    if (Test-Path -Path $path -PathType leaf) {
+      Move-Item $path $destination -PassThru
     }
+  }
 
   if (Test-Path -Path "./*ABDULWAHAB*.pdf" -PathType leaf) {
     Write-Host "Moving Ali Abdulwahab to $invoices/Ali Abdulwahab Al Mutawa"
@@ -47,7 +47,7 @@ function fileme {
   if (Test-Path -Path "./*JS*SMASH TRADING*.pdf" -PathType leaf) {
     Write-Host "Moving SMASH TRADING to $invoices/SMASH TRADING"
     Move-Item "./*JS*SMASH TRADING*.pdf" "$invoices/SMASH TRADING"
-    }
+  }
 
   if (Test-Path -Path "./*KOMAX*SA *.pdf" -PathType leaf) {
     Write-Host "Archiving TNF Komax SA (Chile) to $tnf_komax_chile"
@@ -98,5 +98,4 @@ function fileme {
     Move-Item "TNF*JUST*US*" $justus_edit
     folderme $justus_edit vans grimoldi
   }
-
 }
