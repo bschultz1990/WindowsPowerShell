@@ -65,8 +65,8 @@ function fileme {
   }
 
   if (Test-Path -Path "./*STARLIKE*.pdf" -PathType leaf) {
-    Write-Host "Archiving SW Starlike to $smartwool_starlike_edit"
-    Move-Item "*SW*STARLIKE*.pdf" $smartwool_starlike_edit
+    Write-Host "Archiving SW Starlike to $invoices"
+    Move-Item "*SW*STARLIKE*.pdf" $invoices
   }
 
   if (Test-Path -Path "./*VN*GRIMURU*.pdf" -PathType leaf) {
