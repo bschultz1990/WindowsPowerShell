@@ -2,8 +2,8 @@
 function fileme2 {
   $confirmed = $false
   while ($confirmed -eq $false) {
-    Write-Host "=== IMPORTANT! Complete all of the following before continuing:===`n"
-    "[ ] Remove all Starlike orders that are USDC`n"
+    Write-Host "=== IMPORTANT! Complete all of the following before continuing:===" -ForegroundColor Black -BackgroundColor Yellow
+    Write-Host "[ ] Remove all Starlike orders that are USDC" -ForegroundColor DarkGray
     
     $response = Read-Host "Have you completed all of the above? (yes/no)"
     
@@ -12,7 +12,6 @@ function fileme2 {
     }
     elseif ($response.ToLower() -eq 'yes') {
       $confirmed = $true
-      Write-Host ""
     }
     else {
       Write-Host "Invalid input. Please enter 'yes' or 'no'."
@@ -20,20 +19,38 @@ function fileme2 {
   }
   
   # if the backup directory doesn't exist, create one.
-  if (-not (Test-Path backup)) { mkdir backup }
+  if (-not (Test-Path backup)) {
+    mkdir backup
+  }
   Copy-Item *.pdf "./backup"
   
   foreach ($key in $bpaths.Keys) {
     if (Test-Path -Path $bpaths.$key.search -PathType leaf) {
-      Write-Host "Moving" $bpaths.$key.search "to" $bpaths.$key.dest
-      Move-Item $bpaths.$key.search $bpaths.$key.dest
+      Write-Host ""
+      Write-Host "Moving to" $bpaths.$key.dest
+      
+      foreach ($i in (Get-ChildItem $bpaths.$key.search)) {
+        Move-Item $i $bpaths.$key.dest -ErrorAction SilentlyContinue -ErrorVariable err
+        Write-Host $i.name -NoNewline -ForegroundColor DarkGray 
+        
+        if ($err) {
+          Write-Host " already exists at destination." -ForegroundColor Yellow
+        }
+
+        if (-not $err) {
+          Write-Host " Done!" -ForegroundColor Green
+        }
+
+        $err = $null
+
+      }
       if ($bpaths.$key.action -eq "folder") {
         folderme $bpaths.$key.dest $bpaths.$key.fd1 $bpaths.$key.fd2
       }
 
     }
   }
-
+  Write-Host ""
 }
 
 $bpaths = @{
