@@ -1,101 +1,137 @@
+. $PSScriptRoot\vfpaths.ps1
 function fileme {
   $confirmed = $false
   while ($confirmed -eq $false) {
-    Write-Host "=== IMPORTANT! Complete all of the following before continuing:===`n"
-    "[ ] Remove all Starlike orders that are USDC`n"
-
+    Write-Host "=== IMPORTANT! Complete all of the following before continuing:===" -ForegroundColor Black -BackgroundColor Yellow
+    Write-Host "[ ] Remove all Starlike orders that are USDC" -ForegroundColor DarkGray
+    
     $response = Read-Host "Have you completed all of the above? (yes/no)"
-
+    
     if ($response.ToLower() -eq 'no') {
       return
     }
     elseif ($response.ToLower() -eq 'yes') {
       $confirmed = $true
-      Write-Host ""
     }
     else {
       Write-Host "Invalid input. Please enter 'yes' or 'no'."
     }
   }
+  
+  # if the backup directory doesn't exist, create one.
+  if (-not (Test-Path backup)) {
+    mkdir backup
+  }
+  Copy-Item *.pdf "./backup"
+  
+  foreach ($key in $bpaths.Keys) {
+    if (Test-Path -Path $bpaths.$key.search -PathType leaf) {
+      Write-Host ""
+      Write-Host "Moving to" $bpaths.$key.dest
+      
+      foreach ($i in (Get-ChildItem $bpaths.$key.search)) {
+        Move-Item $i $bpaths.$key.dest -ErrorAction SilentlyContinue -ErrorVariable err
+        Write-Host $i.name -NoNewline -ForegroundColor DarkGray 
+        
+        if ($err) {
+          Write-Host " already exists at destination." -ForegroundColor Yellow
+        }
 
-  function moveme ($path, $destination) {
-    if (Test-Path -Path $path -PathType leaf) {
-      Move-Item $path $destination -PassThru
+        if (-not $err) {
+          Write-Host " Done!" -ForegroundColor Green
+        }
+
+        $err = $null
+
+      }
+      if ($bpaths.$key.action -eq "folder") {
+        folderme $bpaths.$key.dest $bpaths.$key.fd1 $bpaths.$key.fd2
+      }
+
     }
   }
+  Write-Host ""
+}
 
-  if (Test-Path -Path "./*ABDULWAHAB*.pdf" -PathType leaf) {
-    Write-Host "Moving Ali Abdulwahab to $invoices/Ali Abdulwahab Al Mutawa"
-    Move-Item "./*ABDULWAHAB*.pdf" "$invoices/Ali Abdulwahab Al Mutawa"
+$bpaths = @{
+  "_abdulwahab"          = @{
+    "search" = "./*ABDULWAHAB*.pdf"
+    "dest"   = "$invoices/Ali Abdulwahab Al Mutawa"
+    "action" = "archive"
   }
-
-  if (Test-Path -Path "./*VN*FORUS*.pdf" -PathType leaf) {
-    Write-Host "Archiving VANS Forus to $vans_forus"
-    Move-Item "*VN*FORUS*.pdf" $vans_forus
+  "_vans_forus"          = @{
+    "search" = "./*VN*FORUS*.pdf"
+    "dest"   = $vans_forus
+    "action" = "archive"
   }
-
-  if (Test-Path -Path "./*JS*FORUS*.pdf" -PathType leaf) {
-    Write-Host "Archiving JanSport Forus to $jansport_forus"
-    Move-Item "*JS*FORUS*.pdf" $jansport_forus
+  "_jansport_forus"      = @{
+    "search" = "./*JS*FORUS*.pdf"
+    "dest"   = $jansport_forus
+    "action" = "archive"
   }
-  
-  if (Test-Path -Path "./*JS*SAVE COMERCIAL E IMPORTADORA LTDA*.pdf" -PathType leaf) {
-    Write-Host "Archiving JS SAVE... to $jansport_save"
-    Move-Item "./*JS*SAVE COMERCIAL E IMPORTADORA LTDA*.pdf" $jansport_save
+  "_jansport_save"       = @{
+    "search" = "./*JS*SAVE COMERCIAL E IMPORTADORA LTDA*.pdf"
+    "dest"   = $jansport_save
+    "action" = "archive"
   }
-
-  if (Test-Path -Path "./*JS*SMASH TRADING*.pdf" -PathType leaf) {
-    Write-Host "Moving SMASH TRADING to $invoices/SMASH TRADING"
-    Move-Item "./*JS*SMASH TRADING*.pdf" "$invoices/SMASH TRADING"
+  "_jansport_smash"      = @{
+    "search" = "./*JS*SMASH TRADING*.pdf"
+    "dest"   = "$invoices/SMASH TRADING"
+    "action" = "edit"
   }
-
-  if (Test-Path -Path "./*KOMAX*SA *.pdf" -PathType leaf) {
-    Write-Host "Archiving TNF Komax SA (Chile) to $tnf_komax_chile"
-    Move-Item "*KOMAX*SA *.pdf" $tnf_komax_chile
+  "_tnf_komax_chile"     = @{
+    "search" = "./*KOMAX*SA *.pdf"
+    "dest"   = $tnf_komax_chile
+    "action" = "archive"
   }
-
-  if (Test-Path -Path "./*KOMAX*PERU *.pdf" -PathType leaf) {
-    Write-Host "Archiving TNF Komax Peru to $tnf_komax_peru"
-    Move-Item "*KOMAX PERU*.pdf" $tnf_komax_peru
+  "_tnf_komax_peru"      = @{
+    "search" = "./*KOMAX*PERU *.pdf"
+    "dest"   = $tnf_komax_peru
+    "action" = "archive"
   }
-
-  if (Test-Path -Path "./SW*LOST ARROW*.pdf" -PathType leaf) {
-    Write-Host "Moving Lost Arrow to $smartwool_lostarrow_edit"
-    Move-Item "SW*LOST ARROW*.pdf" $smartwool_lostarrow_edit
+  "_smartwool_lostarrow" = @{
+    "search" = "./SW*LOST ARROW*.pdf"
+    "dest"   = $smartwool_lostarrow_edit
+    "action" = "edit"
   }
-
-  if (Test-Path -Path "./*STARLIKE*.pdf" -PathType leaf) {
-    Write-Host "Archiving SW Starlike to $invoices"
-    Move-Item "*SW*STARLIKE*.pdf" $invoices
+  "_smartwool_starlike"  = @{
+    "search" = "./*STARLIKE*.pdf"
+    "dest"   = $smartwool_starlike_edit
+    "action" = "edit"
   }
-
-  if (Test-Path -Path "./*VN*GRIMURU*.pdf" -PathType leaf) {
-    Write-Host "Moving VANS Grimuru to $vans_grimuru_edit"
-    Move-Item "*VN*GRIMURU*.pdf" $vans_grimuru_edit
-    folderme $vans_grimuru_edit vans grimuru
+  "_vans_grimuru"        = @{
+    "search" = "./*VN*GRIMURU*.pdf"
+    "dest"   = $vans_grimuru_edit
+    "action" = "folder"
+    "fd1"    = "vans"
+    "fd2"    = "grimuru"
   }
-
-  if (Test-Path -Path "./*TNF*IMPORTADORA*.pdf" -PathType leaf) {
-    Write-Host "Moving TNF COMERCIAL to $tnf_comercial_edit"
-    Move-Item "*TNF*IMPORTADORA*.pdf" $tnf_comercial_edit
-    folderme $tnf_comercial_edit tnf comercial
+  "_tnf_importadora"     = @{
+    "search" = "./*TNF*IMPORTADORA*.pdf"
+    "dest"   = $tnf_comercial_edit
+    "action" = "folder"
+    "fd1"    = "tnf"
+    "fd2"    = "comercial"
   }
-
-  if (Test-Path -Path "./*VN*AREZZO*.pdf" -PathType leaf) {
-    Write-Host "Moving VN Arezzo to $vans_arezzo_edit"
-    Move-Item "*VN*AREZZO*.pdf" $vans_arezzo_edit
-    folderme $vans_arezzo_edit vans arezzo
+  "_vans_arezzo"         = @{
+    "search" = "./*VN*AREZZO*.pdf"
+    "dest"   = $vans_arezzo_edit
+    "action" = "folder"
+    "fd1"    = "vans"
+    "fd2"    = "arezzo"
   }
-
-  if (Test-Path -Path "./TNF*JUST*US*" -PathType leaf) {
-    Write-Host "Moving TNF JUST US to $justus_edit"
-    Move-Item "TNF*JUST*US*" $justus_edit
-    folderme $justus_edit tnf justus
+  "_tnf_justus"          = @{
+    "search" = "./TNF*JUST*US*"
+    "dest"   = $justus_edit
+    "action" = "folder"
+    "fd1"    = "tnf"
+    "fd2"    = "justus"
   }
-
-  if (Test-Path -Path "./VN*GRIMOLDI*" -PathType leaf) {
-    Write-Host "Moving TNF JUST US to $justus_edit"
-    Move-Item "TNF*JUST*US*" $justus_edit
-    folderme $justus_edit vans grimoldi
+  "_vans_grimoldi"       = @{
+    "search" = "./VN*GRIMOLDI*"
+    "dest"   = $vans_grimoldi_edit
+    "action" = "folder"
+    "fd1"    = "vans"
+    "fd2"    = "grimoldi"
   }
 }
