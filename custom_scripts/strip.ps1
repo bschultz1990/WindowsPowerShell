@@ -3,7 +3,10 @@ function strip ($file) {
   if ([System.IO.Path]::GetExtension($file) -ne '.pdf') {
     return "Please provide a pdf file."
   }
-  pdftk $file cat output out.pdf
-  rm $file
+  if (-not (Test-Path -Path backup)) {
+    mkdir backup
+  }
+  cpdf $file -o out.pdf
+  Move-Item $file backup
   Rename-Item -Path out.pdf -NewName $file
 }

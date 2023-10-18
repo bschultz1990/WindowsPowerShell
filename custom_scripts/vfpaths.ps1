@@ -1,7 +1,3 @@
-$env:Path += ";C:\Users\bschul3\Apps\"
-$env:Path += ";C:\Program Files\Microsoft Office\root\Office16"
-$env:Path += ";C:\Program Files\Adobe\Acrobat DC\Acrobat"
-
 $altra_lotus = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1034 Altra\Lotus Corp - Japan 10743817\Invoices\2023"
 $attachments = "~\OneDrive - VFC Corp\Attachments"
 $cpdf = "C:\Users\bschul3\Apps\cpdf.exe"

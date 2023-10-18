@@ -20,7 +20,7 @@ function fileme {
   
   # if the backup directory doesn't exist, create one.
   if (-not (Test-Path backup)) {
-    mkdir backup
+    $null = mkdir backup
   }
   Copy-Item *.pdf "./backup"
   
@@ -30,6 +30,13 @@ function fileme {
       Write-Host "Moving to" $bpaths.$key.dest
       
       foreach ($i in (Get-ChildItem $bpaths.$key.search)) {
+        if (-not (Test-Path -Path $bpaths.$key.dest)) {
+          $create_path = "prompt"
+          while ($create_path -eq "prompt") {
+          }
+          Write-Host $bpaths.$key.dest "does not exist. Would you like to create?" -ForegroundColor Yellow -NoNewline
+          mkdir $bpaths.$key.dest
+        }
         Move-Item $i $bpaths.$key.dest -ErrorAction SilentlyContinue -ErrorVariable err
         Write-Host $i.name -NoNewline -ForegroundColor DarkGray 
         
