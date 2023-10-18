@@ -54,6 +54,11 @@ function fileme {
 }
 
 $bpaths = @{
+  "_altra_lotus"         = @{
+    "search" = "./*ALT*LOTUS*.pdf"
+    "dest"   = "$altra_lotus"
+    "action" = "archive"
+  }
   "_abdulwahab"          = @{
     "search" = "./*ABDULWAHAB*.pdf"
     "dest"   = "$invoices/Ali Abdulwahab Al Mutawa"
@@ -132,6 +137,13 @@ $bpaths = @{
     "dest"   = $vans_grimoldi_edit
     "action" = "folder"
     "fd1"    = "vans"
+    "fd2"    = "grimoldi"
+  }
+  "_tnf_grimoldi"        = @{
+    "search" = "./TNF*GRIMOLDI*"
+    "dest"   = $tnf_grimoldi_edit
+    "action" = "folder"
+    "fd1"    = "tnf"
     "fd2"    = "grimoldi"
   }
 }
