@@ -30,35 +30,32 @@ function fileme {
       Write-Host "Moving to" $bpaths.$key.dest
       
       foreach ($i in (Get-ChildItem $bpaths.$key.search)) {
-        if (-not (Test-Path -Path $bpaths.$key.dest)) {
-          $create_path = "prompt"
-          while ($create_path -eq "prompt") {
-          }
-          Write-Host $bpaths.$key.dest "does not exist. Would you like to create?" -ForegroundColor Yellow -NoNewline
-          mkdir $bpaths.$key.dest
-        }
+        # if (-not (Test-Path -Path $bpaths.$key.dest)) {
+        #   Write-Host $bpaths.$key.dest "does not exist. Creating..." -ForegroundColor Yellow -NoNewline
+        #   mkdir $bpaths.$key.dest
+        # }
         Move-Item $i $bpaths.$key.dest -ErrorAction SilentlyContinue -ErrorVariable err
         Write-Host $i.name -NoNewline -ForegroundColor DarkGray 
+      }
         
-        if ($err) {
-          Write-Host " already exists at destination." -ForegroundColor Yellow
-        }
-
-        if (-not $err) {
-          Write-Host " Done!" -ForegroundColor Green
-        }
-
-        $err = $null
-
+      if ($err) {
+        Write-Host " already exists." -ForegroundColor Yellow
       }
-      if ($bpaths.$key.action -eq "folder") {
-        folderme $bpaths.$key.dest $bpaths.$key.fd1 $bpaths.$key.fd2
+
+      if (-not $err) {
+        Write-Host " Done!" -ForegroundColor Green
       }
+
+      $err = $null
 
     }
+    if ($bpaths.$key.action -eq "folder") {
+      folderme $bpaths.$key.dest $bpaths.$key.fd1 $bpaths.$key.fd2
+    }
+
   }
-  Write-Host ""
 }
+Write-Host ""
 
 $bpaths = @{
   "_altra_lotus"         = @{
@@ -68,7 +65,7 @@ $bpaths = @{
   }
   "_abdulwahab"          = @{
     "search" = "./*ABDULWAHAB*.pdf"
-    "dest"   = "$invoices/Ali Abdulwahab Al Mutawa"
+    "dest"   = "$jansport_ali_abdulwahab"
     "action" = "archive"
   }
   "_vans_forus"          = @{
