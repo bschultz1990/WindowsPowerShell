@@ -7,8 +7,13 @@
 function invoiceNums {
   $global:invoiceTable = [ordered]@{}
 
+  # Create backup directory silently if there is none
+  if (-not (Test-Path backup)) {
+    $null = mkdir backup
+  }
+
   # Ask the user for a list of invoice numbers. Compare it to the files in the present directory.
-  $inv = Read-Host "Enter list of invoice numbers separated by a semicolon or 'q' to quit."
+  $inv = Read-Host "Enter list of invoice numbers separated by a semicolon or 'q' to quit. e.g.: 10.00;20.00"
   if ($inv.ToLower() -eq "q") {
     return	
   }
@@ -30,6 +35,8 @@ function invoiceNums {
         "Net Wt."   = $null
         "Gross Wt." = $null
       }
+      # Quietly copy the file to the backup directory
+      $null = Copy-Item *$i* backup
     }
   }
   Write-Host ""
@@ -91,23 +98,38 @@ function invoiceNums {
     $global:invoiceTable[$invoiceNumber]["Gross Wt."] = $global:grossWt[$j]
   }
 
+  manual_confirm
+  cpdf_weights
+}
+
+function make_backup {
+}
+
+function manual_confirm {
   # Display the results and ask for confirmation before continuing.
   Write-Host ""
   Write-Host "Invoice Table:"
-  Write-Host ""
-  Write-Host "Invoice Number Net Wt. Gross Wt."
   foreach ($i in $global:invoiceTable.Keys) {
     Write-Host "$i" -NoNewLine
-    Write-Host " $($global:invoiceTable[$i]["Net Wt."])" -NoNewline
-    Write-Host " $($global:invoiceTable[$i]["Gross Wt."])"
+    Write-Host " Net: " -NoNewLine -ForegroundColor DarkGray
+    Write-Host "$($global:invoiceTable[$i]['Net Wt.'])" -NoNewline
+    Write-Host " Gross: " -NoNewLine -ForegroundColor DarkGray
+    Write-Host "$($global:invoiceTable[$i]['Gross Wt.'])"
   }
   $response = Read-Host "Review carefully. Is this correct? [yes][no]"
   if ($response.ToLower() -eq "no") {
     return Write-Host "Aborted. Please try again with correct data." -ForegroundColor Yellow
   }
 
-  # ACTIVATE FORWARD CPDF FIREPOWER!
-  for ($i = 0; $i -lt $global:inv.Length; $i++) {
-    Write-Host $global:inv[$i]
+}
+function cpdf_weights {
+  foreach ($i in $global:invoiceTable.Keys) {
+    $tnet = "$($global:invoiceTable[$i]['Net Wt.'])" + " kg"
+    $tgross = "$($global:invoiceTable[$i]['Gross Wt.'])" + " kg"
+    # $toutput = "$((Get-Item *$i*).BaseName)_weights.pdf"
+    $toutput = "$((Get-Item *$i*).Name)"
+    
+    Write-Host $toutput
+    cpdf -add-text $tnet -topleft "319 239" -font "Helvetica" -font-size 8 (Get-Item *$i*) AND -add-text $tgross -topleft "442 239" -font "Helvetica" -font-size 8 (Get-Item *$i*) -o $toutput
   }
 }
