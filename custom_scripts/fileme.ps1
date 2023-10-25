@@ -138,14 +138,14 @@ $bpaths = @{
   }
   "_vans_grimoldi"       = @{
     "search" = "./VN*GRIMOLDI*"
-    "dest"   = $vans_grimoldi_edit
+    "dest"   = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI"
     "action" = "folder"
     "fd1"    = "vans"
     "fd2"    = "grimoldi"
   }
   "_tnf_grimoldi"        = @{
     "search" = "./TNF*GRIMOLDI*"
-    "dest"   = $tnf_grimoldi_edit
+    "dest"   = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI"
     "action" = "folder"
     "fd1"    = "tnf"
     "fd2"    = "grimoldi"
