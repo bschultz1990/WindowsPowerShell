@@ -102,9 +102,6 @@ function invoiceNums {
   cpdf_weights
 }
 
-function make_backup {
-}
-
 function manual_confirm {
   # Display the results and ask for confirmation before continuing.
   Write-Host ""
