@@ -22,6 +22,7 @@ $paths = "C:\Users\bschul3\Documents\WindowsPowerShell\custom_scripts\vfpaths.ps
 $process_inv = "~\OneDrive - VFC Corp\Documents\Library\Processing Invoices Emailed to VFOD Intl Docs.pdf"
 $pwshconfig = "~\Documents\WindowsPowerShell"
 $screenshots = "C:\Users\bschul3\OneDrive - VFC Corp\Pictures\Screenshots"
+$smartwool_cerrotorre = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Cerrotorre - South Korea 80072557\Invoices\2023"
 $smartwool_lostarrow = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Lost Arrow -Japan 80032148\Invoices\2023"
 $smartwool_lostarrow_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\LOST ARROW"
 $smartwool_oda = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Outdoor Agency - Australia 80070847\Invoices\2023"
