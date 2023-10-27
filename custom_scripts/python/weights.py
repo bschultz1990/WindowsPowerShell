@@ -10,6 +10,9 @@ import shutil
 
 # Global variables
 working_dir = ""
+invoice_list = []
+net_weights = []
+gross_weights = []
 
 # Functions
 def get_working_dir():
@@ -44,36 +47,62 @@ def check_invoices():
     corresponding files exist in the current directory.
     """
     invoices = []
-    print ("Enter a list of invoices: ")
+    found_files = []
+    not_found_files = []
+    print ("Enter a column of invoice numbers. Press [ENTER] when finished: ")
     while True:
         line = input()
         if line == "":
             break
         invoices.append(line)
 
+    
+    print("Checking invoices...")
+
     for i in invoices:
-        print("Checking invoice: " + i, end=" ")
+        file_check = glob.glob(working_dir + "/*" + i + "*.pdf")
 
-        found_file = glob.glob(working_dir + "/*" + i + "*.pdf")[0]
+        if not file_check:
+            not_found_files.append(i)
 
-        if not found_file:
-            print(cf.yellow("Not found"))
-            print ("One or more invoices were not found. Double-check your files list and try again.")
-            return 1
+        if file_check:
+            found_files.append(file_check[0])
 
-        if found_file:
-            print(cf.green("Found!"), end=" ")
-            print(cf.green("copying..."), end=" ")
-            # print("Copying ", found_file)
-            # print(" to ", working_dir + "/" + "backup")
-            shutil.copy(found_file, working_dir + "/" + "backup") 
-            print(cf.gray(os.path.basename(found_file)))
+    if len(not_found_files) > 0:
+        print(cf.red("The following invoices were not found. Please check your data and try again."))
+        for i in not_found_files:
+            print(i)
+        return 1
+    
+    for i in found_files:
+        print(cf.green("Found!"), end=" ")
+        print(cf.gray(os.path.basename(i)))
+        shutil.copy(i, working_dir + "/" + "backup")
 
-        print()
+    print()
 
+def get_weights(weight_type):
+    """
+    Get weights and format them to floating point numbers with two decimal places.
+    Use this function to assign global variables `net_weights` and `gross_weights`.
+    """
+
+    weights = []
+
+    print("Enter a column of " + cf.cyan(weight_type) + " weights. Press [ENTER] when finished: ")
+    while True:
+        line = input()
+        if line == "":
+            break
+        line = "{:.2f}".format(float(line))
+        weights.append(line)
+    return weights
+    
 
 # Executable Code
 if __name__ == "__main__":
-    get_working_dir()
-    check_backup_dir()
-    check_invoices()
+    # get_working_dir()
+    # check_backup_dir()
+    # check_invoices()
+    net_weights = get_weights("net")
+    gross_weights = get_weights("gross")
