@@ -36,18 +36,17 @@ function fileme {
         # }
         Move-Item $i $bpaths.$key.dest -ErrorAction SilentlyContinue -ErrorVariable err
         Write-Host $i.name -NoNewline -ForegroundColor DarkGray 
+        if ($err) {
+          Write-Host " already exists." -ForegroundColor Yellow
+        }
+
+        if (-not $err) {
+          Write-Host " Done!" -ForegroundColor Green
+        }
+
+        $err = $null
       }
         
-      if ($err) {
-        Write-Host " already exists." -ForegroundColor Yellow
-      }
-
-      if (-not $err) {
-        Write-Host " Done!" -ForegroundColor Green
-      }
-
-      $err = $null
-
     }
     if ($bpaths.$key.action -eq "folder") {
       folderme $bpaths.$key.dest $bpaths.$key.fd1 $bpaths.$key.fd2
