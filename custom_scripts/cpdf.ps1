@@ -21,7 +21,7 @@ function invoiceNums {
   Write-Host "Checking for invoice numbers..." -ForegroundColor DarkGray
   foreach ($i in $global:inv) {
     Write-Host "$i" -NoNewline
-
+    res
     if (-not (Test-Path -Path *$i*.pdf -PathType leaf) -or $i -eq "") {
       Write-Host " Not Found! " -ForegroundColor Red
       return Write-Host "One or more invoices were not found. Double-check your files and/or omit a semicolon from the end." -ForegroundColor Red
