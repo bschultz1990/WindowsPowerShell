@@ -23,8 +23,8 @@ function c {
     Write-Host $header -ForegroundColor Blue
 
     for ($i = 0; $i -lt $global:dirs_array.Length; $i++) {
-      # Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
-      Write-Host "$i  " -ForegroundColor Yellow -NoNewline
+      Write-Host "$i  " -ForegroundColor DarkGray -NoNewline
+      # Write-Host "$i  " -ForegroundColor Yellow -NoNewline
 
       # Highlight search results
       if (($searched -eq $True) -and $global:dirs_array[$i] -match $search) {

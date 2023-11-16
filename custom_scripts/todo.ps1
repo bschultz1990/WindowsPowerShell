@@ -12,7 +12,7 @@ function todo {
   }
 
   if ($v) {
-    bat $todo_path 
+    cat $todo_path 
     return 
   }
 
@@ -25,5 +25,5 @@ function todo {
   Add-Content -Path $todo_path -Value $todo
   nvim $todo_path +sort +wq
   Clear-Host
-  bat $todo_path
+  cat $todo_path
 }

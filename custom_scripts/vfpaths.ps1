@@ -43,4 +43,5 @@ $vans_grimoldi = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Va
 $vans_grimoldi_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMOLDI\VANS\"
 $vans_grimuru = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimuru - Uruguay 10761571\Invoices\2023"
 $vans_grimuru_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMURU"
+$weights = "C:\Users\bschul3\Documents\python\weights.py"
 $wm_vans = "~\OneDrive - VFC Corp\Documents\Stamps\pdf\Vans.pdf"
