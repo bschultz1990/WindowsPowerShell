@@ -12,28 +12,20 @@ function fileme {
       Write-Host "Moving to" $bpaths.$key.dest
       
       foreach ($i in (Get-ChildItem $bpaths.$key.search)) {
-        # if (-not (Test-Path $bpaths.$key.dest)) {
-        #   Write-Host $bpaths.$key.dest "does not exist. Creating..." -ForegroundColor Yellow -NoNewline
-        #   mkdir $bpaths.$key.dest
-        # }
+        if (-not (Test-Path $bpaths.$key.dest)) {
+          Write-Host $bpaths.$key.dest "does not exist. Creating..." -ForegroundColor Yellow -NoNewline
+          New-Item -ItemType Directory -Path $bpaths.$key.dest
+        }
 
-        Move-Item $i $bpaths.$key.dest -ErrorAction SilentlyContinue -ErrorVariable err
+        Move-Item $i $bpaths.$key.dest
         Write-Host $i.name -NoNewline -ForegroundColor DarkGray 
-        if ($err) {
-          Write-Host " already exists." -ForegroundColor Yellow
-        }
-
-        if (-not $err) {
-          Write-Host " Done!" -ForegroundColor Green
-        }
-
+        Write-Host " Done!" -ForegroundColor Green
       }
         
+      if ($bpaths.$key.action -eq "folder") {
+        folderme $bpaths.$key.dest $bpaths.$key.fd1 $bpaths.$key.fd2
+      }
     }
-    if ($bpaths.$key.action -eq "folder") {
-      folderme $bpaths.$key.dest $bpaths.$key.fd1 $bpaths.$key.fd2
-    }
-    $err = $null
 
   }
 }
