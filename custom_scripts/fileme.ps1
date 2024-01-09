@@ -34,7 +34,7 @@ Write-Host ""
 $bpaths = @{
   "_altra_lotus"         = @{
     "search" = "./*ALT*LOTUS*.pdf"
-    "dest"   = "$altra_lotus"
+    "dest"   = "$altra_lotus_2024"
     "action" = "archive"
   }
   "_abdulwahab"          = @{
@@ -44,17 +44,17 @@ $bpaths = @{
   }
   "_vans_forus"          = @{
     "search" = "./*VN*FORUS*.pdf"
-    "dest"   = $vans_forus
+    "dest"   = $vans_forus_2024
     "action" = "archive"
   }
   "_jansport_forus"      = @{
     "search" = "./*JS*FORUS*.pdf"
-    "dest"   = $jansport_forus
+    "dest"   = $jansport_forus_2024
     "action" = "archive"
   }
   "_jansport_save"       = @{
     "search" = "./*JS*SAVE COMERCIAL E IMPORTADORA LTDA*.pdf"
-    "dest"   = $jansport_save
+    "dest"   = $jansport_save_2024
     "action" = "archive"
   }
   "_jansport_smash"      = @{
@@ -64,12 +64,12 @@ $bpaths = @{
   }
   "_tnf_komax_chile"     = @{
     "search" = "./*KOMAX*SA *.pdf"
-    "dest"   = $tnf_komax_chile
+    "dest"   = $tnf_komax_chile_2024
     "action" = "archive"
   }
   "_tnf_komax_peru"      = @{
     "search" = "./*KOMAX*PERU *.pdf"
-    "dest"   = $tnf_komax_peru
+    "dest"   = $tnf_komax_peru_2024
     "action" = "archive"
   }
   "_smartwool_lostarrow" = @{
@@ -105,7 +105,7 @@ $bpaths = @{
   }
   "_tnf_justus"          = @{
     "search" = "./TNF*JUST*US*"
-    "dest"   = $justus_edit
+    "dest"   = $tnf_justus_edit
     "action" = "folder"
     "fd1"    = "tnf"
     "fd2"    = "justus"
