@@ -5,9 +5,7 @@ function attachme {
   }
   
   # Remove any credit memos
-  $memos = @()
   foreach ( $i in (Get-ChildItem -Filter "*#_7*")) {
-    $memos += $i
     Remove-Item $i
   }
 
@@ -22,10 +20,5 @@ function attachme {
   foreach ($i in (Get-ChildItem . -Exclude backup)) {
     Move-Item $i/*.pdf .
     Remove-Item $i
-  }
-  # Report
-  Write-Host "Removed the following memos:"
-  foreach ($i in $memos) {
-    Write-Host $i
   }
 }
