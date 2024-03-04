@@ -15,6 +15,7 @@ $invscript_server = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Libr
 $jansport_ali_abdulwahab = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1001 JanSport\Ali Abdulwahab Al Mutawa - Kuwait 80010809\Invoices"
 $jansport_forus_2023 = "\\jsap2nfiler1\jsap_data\sharedir\Credit\International\1001 JanSport\Forus - Chile 80008794\Invoices\2023"
 $jansport_forus_2024 = "\\jsap2nfiler1\jsap_data\sharedir\Credit\International\1001 JanSport\Forus - Chile 80008794\Invoices\2024"
+$jansport_musinsa_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1001 JanSport\Musinsa Trading - South Korea - 80074804\Invoices\2024"
 $jansport_save_2023 = "\\jsap2nfiler1\jsap_data\sharedir\Credit\International\1001 JanSport\SAVE Comercial Aste - Brazil 80004744\Invoices\2023"
 $jansport_save_2024 = "\\jsap2nfiler1\jsap_data\sharedir\Credit\International\1001 JanSport\SAVE Comercial Aste - Brazil 80004744\Invoices\2024"
 $jansport_smashtrading_2023 = "\\jsap2nfiler1\jsap_data\sharedir\Credit\International\1001 JanSport\Smash Trading - Egypt 80011657\Invoices\2023"
