@@ -15,7 +15,7 @@ function attachme {
   # Check to see if eml-extractor is installed
   if (-not (Get-Command eml-extractor -ErrorAction SilentlyContinue)) {
     Write-Host "Installing eml-extractor..."
-    pipx install eml-extractor
+    python -m pip install eml-extractor
   }
   eml-extractor
 
