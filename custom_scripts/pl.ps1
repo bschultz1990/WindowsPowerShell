@@ -31,6 +31,6 @@ function pl {
   }
 
   cpdf -stamp-on $stamp_vans_pl pl.pdf 1 -o "PL_$ngc.pdf"
-  Move-Item pl.pdf backup
+  Move-Item pl.pdf backup -force
   Invoke-Item "PL_$ngc.pdf"
 }
