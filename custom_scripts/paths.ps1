@@ -1,4 +1,3 @@
-
 function paths {
   $content = Get-Content $pwshconfig/custom_scripts/vfpaths.ps1
   $table = [ordered]@{}

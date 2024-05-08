@@ -75,4 +75,5 @@ $vans_grimoldi_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- 
 $vans_grimuru_2023 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimuru - Uruguay 10761571\Invoices\2023"
 $vans_grimuru_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Grimuru - Uruguay 10761571\Invoices\2024"
 $vans_grimuru_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\GRIMURU"
+$watermark_arezzo_sample = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\watermarks_custom\Arezzo Sample Addresses.pdf"
 $weights = "C:\Users\bschul3\Documents\weights\weights\weights.py"
