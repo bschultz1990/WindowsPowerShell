@@ -1,5 +1,6 @@
 $altra_lotus_2023 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1034 Altra\Lotus Corp - Japan 10743817\Invoices\2023"
 $altra_lotus_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1034 Altra\Lotus Corp - Japan 10743817\Invoices\2024"
+$apps = "C:\Users\bschul3\Apps"
 $attachments = "~\OneDrive - VFC Corp\Attachments"
 $cpdf = "C:\Users\bschul3\Apps\cpdf.exe"
 $dl = "~\Downloads"
