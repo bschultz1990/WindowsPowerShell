@@ -122,5 +122,6 @@ function c {
       }
       Clear-Host
     }
+    Clear-Host
   }
 }
