@@ -104,7 +104,7 @@ function c2 {
     }
     if ($response -match '^cp') {
       $arguments = $response -split ' '
-      cp $global:dirs_array[$arguments[1]] $global:dirs_array[$arguments[2]] -recurse
+      Copy-Item $global:dirs_array[$arguments[1]] $global:dirs_array[$arguments[2]] -recurse
       Clear-Host
     }
     if ($response -match '^dd') {
@@ -114,7 +114,7 @@ function c2 {
         $confirm = Read-Host "Are you sure? (yes/no)"
         if ($confirm.ToLower() -eq 'yes') {
           $confirmed = $True
-          rm $global:dirs_array[$arguments[1]]
+          Remove-Item $global:dirs_array[$arguments[1]]
         }
         elseif ($confirm.ToLower() -eq 'no') {
           $confirmed = $True
@@ -125,7 +125,7 @@ function c2 {
     }
     if ($response -match '^mv') {
       $arguments = $response -split ' '
-      mv $global:dirs_array[$arguments[1]] $global:dirs_array[$arguments[2]]
+      Move-Item $global:dirs_array[$arguments[1]] $global:dirs_array[$arguments[2]]
       Clear-Host
     }
     if ($response -match '^touch') {
