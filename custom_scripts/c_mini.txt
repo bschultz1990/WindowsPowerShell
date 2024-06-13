@@ -1,0 +1,26 @@
+function c
+{
+  param(
+    [string]$directory
+  )
+  Clear-Host
+  Set-Location $directory
+  Get-ChildItem -Name
+  Write-Host
+}
+
+function b
+{
+  param(
+    [string]$directory
+  )
+  Set-Location ..
+  Clear-Host
+  Get-ChildItem -Name
+  Write-Host
+}
+
+function q
+{
+  Clear-Host
+}
