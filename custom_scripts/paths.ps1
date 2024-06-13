@@ -1,4 +1,4 @@
-function paths {
+function paths_view {
   $content = Get-Content $pwshconfig/custom_scripts/vfpaths.ps1
   $table = [ordered]@{}
   foreach ($line in $content) {
@@ -9,6 +9,6 @@ function paths {
   Write-Output ($table)
 }
 
-function path {
-  open "$pwshconfig/custom_scripts/vfpaths.ps1"
+function path_edit {
+  nvim "$pwshconfig/custom_scripts/vfpaths.ps1"
   }
