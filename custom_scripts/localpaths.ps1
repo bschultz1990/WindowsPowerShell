@@ -1,6 +1,8 @@
 ﻿$dl = "~\Downloads"
 $docs = "~\Documents"
 $dt = "~\Desktop"
+$icedrive = "D:\Icedrive\"
+$backgrounds = "D:\Icedrive\Pictures\Backgrounds"
 $helix_config = "~\scoop\persist\helix"
 $msfs_apps = "D:\Games\MSFS_Apps"
 $msfs_content = "D:\Games\Microsoft Flight Simulator\Content"
