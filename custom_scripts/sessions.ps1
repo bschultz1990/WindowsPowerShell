@@ -6,6 +6,7 @@ function sessions
   {
     Remove-Item neovide_backtraces.log 
   }
+
   if (Get-Command neovide -errorAction SilentlyContinue)
   {
     neovide +source $(fzf)
