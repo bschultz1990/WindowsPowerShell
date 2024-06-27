@@ -23,7 +23,7 @@ if ([System.Environment]::MachineName -ne "FALCON-II")
   $library = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library"
   $library_local = "C:\Users\bschul3\OneDrive - VFC Corp\Library"
   $lookitup = "C:\Users\bschul3\Documents\python\lookitup\lookitup.py"
-  $notes = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\Notes"
+  $notes_vfc = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\Notes"
   $onedrive_vfc = "C:\Users\bschul3\OneDrive - VFC Corp\Documents"
   $paths = "C:\Users\bschul3\Documents\WindowsPowerShell\custom_scripts\vfpaths.ps1"
   $process_inv = "~\OneDrive - VFC Corp\Documents\Library\Processing Invoices Emailed to VFOD Intl Docs.pdf"
