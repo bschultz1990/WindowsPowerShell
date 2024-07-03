@@ -4,6 +4,7 @@ if ([System.Environment]::MachineName -ne "FALCON-II")
   $apps = "C:\Users\bschul3\Apps"
   $attachments = "~\OneDrive - VFC Corp\Attachments"
   $cpdf = "C:\Users\bschul3\Apps\cpdf.exe"
+  $check_images = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\Check Images (Formerly BoA LB temp)\2024 Lockbox Images - OD USD\"
   $dll = "\\Client\C$\Users\bschul3\Downloads"
   $document_requests = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\Scripts\document_requests.py"
   $dtl = "\\Client\C$\Users\bschul3\Desktop"
