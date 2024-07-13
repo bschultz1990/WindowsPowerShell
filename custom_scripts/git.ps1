@@ -1,3 +1,3 @@
 function ga { git add . }
 function gs { git status }
-function gp { git push }
+function gp { git pull }
