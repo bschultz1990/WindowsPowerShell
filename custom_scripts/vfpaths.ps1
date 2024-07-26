@@ -28,7 +28,7 @@ if ([System.Environment]::MachineName -ne "FALCON-II")
   $onedrive_vfc = "C:\Users\bschul3\OneDrive - VFC Corp\Documents"
   $paths = "C:\Users\bschul3\Documents\WindowsPowerShell\custom_scripts\vfpaths.ps1"
   $process_inv = "~\OneDrive - VFC Corp\Documents\Library\Processing Invoices Emailed to VFOD Intl Docs.pdf"
-  $screenshots = "C:\Users\bschul3\OneDrive - VFC Corp\Pictures\Screenshots"
+  $screenshots = "C:\Users\bschul3\Pictures\Screenshots"
   $smartwool_cerrotorre_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Cerrotorre - South Korea 80072557\Invoices\2024"
   $smartwool_lostarrow_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1008 Smartwool\Lost Arrow -Japan 80032148\Invoices\2024"
   $smartwool_lostarrow_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\LOST ARROW"
