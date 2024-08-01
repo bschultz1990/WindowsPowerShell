@@ -13,9 +13,6 @@ function cc {
   if ($response.ToLower() -eq "y") {
     rm *.pdf
     python "C:\Users\bschul3\OneDrive - VFC Corp\Documents\international_invoices.py"
-    #foreach ($invoice in (Get-ChildItem *stamped.pdf)) {
-    #  cpdf -stamp-on "C:\Users\bschul3\OneDrive - VFC Corp\Documents\watermarks_custom\Clear Weights.pdf" $invoice -o $invoice
-    #}
     mv $dl/*stamped* .
     rm $dl/*.pdf
     ls $dl
