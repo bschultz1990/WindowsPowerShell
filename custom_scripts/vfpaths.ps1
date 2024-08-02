@@ -12,7 +12,7 @@ if ([System.Environment]::MachineName -ne "FALCON-II")
   $fileme_dir = "C:\Users\bschul3\Documents\python\fileme\"
   $invoices = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit"
   $invscript = "C:\Users\bschul3\OneDrive - VFC Corp\Documents\international_invoices\invscript.py"
-  $invscript_server = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\international_invoices.py"
+  $invscript_server = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\Library\Scripts\international_invoices.py"
   $jansport_ali_abdulwahab = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1001 JanSport\Ali Abdulwahab Al Mutawa - Kuwait 80010809\Invoices"
   $jansport_forus_2024 = "\\jsap2nfiler1\jsap_data\sharedir\Credit\International\1001 JanSport\Forus - Chile 80008794\Invoices\2024"
   $jansport_musinsa_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1001 JanSport\Musinsa Trading - South Korea - 80074804\Invoices\2024"
