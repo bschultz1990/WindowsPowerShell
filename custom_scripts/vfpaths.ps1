@@ -52,6 +52,7 @@ if ([System.Environment]::MachineName -ne "FALCON-II")
   $tnf_justus_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\JUSTUS"
   $tnf_komax_chile_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Groupo Axo\Komax SA - Chile 80001904\Invoices\2024"
   $tnf_komax_peru_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1003 TNF\Groupo Axo\Komax - Peru 80012221\Invoices\2024"
+  $training_folder = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\KT - Credit"
   $readdress = "C:\Users\bschul3\Documents\python\readdress\readdress.py"
   $vans_arezzo_2024 = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\1005 Vans\Arezzo - Brazil 10779997\Invoices\2024"
   $vans_arezzo_edit = "\\jsap2nfiler1\jsap_data\Sharedir\Credit\International\- Invoices to Edit\AREZZO"
